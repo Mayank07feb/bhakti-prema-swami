@@ -120,62 +120,121 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
         )}
       </div>
 
-      <div class="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8">
-
-        <!-- ============ SIDEBAR NAVIGATION ============ -->
-        <aside class="lg:sticky lg:top-6 self-start order-2 lg:order-1">
-          <div class="bg-white rounded-xl border border-text-body/10 shadow-sm overflow-hidden">
+      <!-- Audio Player (Mobile - Top Position) -->
+      {transcription.audio.available && (
+        <div class="lg:hidden mb-6">
+          <div class="bg-white rounded-xl border border-text-body/10 shadow-sm overflow-hidden p-4">
+            <h3 class="text-sm font-bold text-text-body mb-3">Audio Player</h3>
             
-            <!-- Mobile: Collapsible Navigation -->
-            <div class="lg:hidden">
-              <button
-                id="mobile-nav-toggle"
-                type="button"
-                class="w-full flex items-center justify-between p-4 text-left bg-gradient-to-r from-orange-50 to-amber-50 border-b border-primary/10"
-              >
-                <span class="text-sm font-bold text-text-body">Table of Contents</span>
-                <svg id="nav-chevron" class="w-5 h-5 text-primary transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                </svg>
-              </button>
-              <div id="mobile-nav-content" class="hidden">
-                <div class="p-4">
-                  <h3 class="text-xs font-bold text-text-body/70 mb-2 px-2">PAGES</h3>
-                  <nav class="space-y-1" id="page-nav-mobile">
-                    {pages.map((page) => (
-                      <a
-                        href={`#page-${page.pageNum}`}
-                        class="page-link block px-3 py-2 text-sm font-medium text-text-body/60 rounded-lg transition-all duration-150 hover:bg-orange-50 hover:text-primary active:bg-orange-100"
-                        data-page={page.pageNum}
-                      >
-                        Page {page.pageNum}
-                      </a>
-                    ))}
-                  </nav>
+            <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-3 sm:p-4 border border-primary/20">
+              <!-- Waveform visualization placeholder -->
+              <div class="flex items-center justify-center gap-0.5 sm:gap-1 h-12 sm:h-16 mb-3">
+                {Array.from({ length: 30 }).map((_, i) => (
+                  <div 
+                    class="waveform-bar bg-primary/30 w-0.5 sm:w-1 rounded-full transition-all duration-200"
+                    style={`height: ${Math.random() * 60 + 20}%`}
+                  ></div>
+                ))}
+              </div>
+
+              <!-- Progress bar -->
+              <div class="mb-3">
+                <input 
+                  type="range" 
+                  id="audio-progress" 
+                  class="audio-slider w-full h-1.5 bg-primary/20 rounded-full appearance-none cursor-pointer"
+                  min="0" 
+                  max="100" 
+                  value="0"
+                />
+                <div class="flex justify-between items-center mt-1.5 text-xs text-text-body/60">
+                  <span id="current-time">0:00</span>
+                  <span id="total-time">{transcription.audio.duration}</span>
                 </div>
               </div>
-            </div>
 
-            <!-- Desktop: Always visible navigation -->
-            <div class="hidden lg:block p-4">
-              <h3 class="text-sm font-bold text-text-body mb-3 px-2">Pages</h3>
-              <nav class="space-y-1" id="page-nav">
-                {pages.map((page) => (
-                  <a
-                    href={`#page-${page.pageNum}`}
-                    class="page-link block px-3 py-2 text-sm font-medium text-text-body/60 rounded-lg transition-all duration-150 hover:bg-orange-50 hover:text-primary"
-                    data-page={page.pageNum}
-                  >
-                    Page {page.pageNum}
-                  </a>
-                ))}
-              </nav>
-            </div>
+              <!-- Controls -->
+              <div class="flex items-center justify-center gap-2 sm:gap-3">
+                <!-- Rewind 10s -->
+                <button
+                  type="button"
+                  id="rewind-btn"
+                  class="p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors"
+                  title="Rewind 10 seconds"
+                >
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"/>
+                  </svg>
+                </button>
 
-            <!-- Audio Player (if available) -->
+                <!-- Play/Pause -->
+                <button
+                  type="button"
+                  id="play-pause-btn"
+                  class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg transition-all duration-200 hover:bg-primary-hover hover:shadow-xl hover:scale-105 active:scale-95"
+                >
+                  <svg id="play-icon" class="w-5 h-5 sm:w-6 sm:h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <svg id="pause-icon" class="w-5 h-5 sm:w-6 sm:h-6 hidden" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                  </svg>
+                </button>
+
+                <!-- Forward 10s -->
+                <button
+                  type="button"
+                  id="forward-btn"
+                  class="p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors"
+                  title="Forward 10 seconds"
+                >
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"/>
+                  </svg>
+                </button>
+
+                <!-- Volume -->
+                <button
+                  type="button"
+                  id="volume-btn"
+                  class="p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors"
+                >
+                  <svg id="volume-icon" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                  </svg>
+                  <svg id="mute-icon" class="w-4 h-4 sm:w-5 sm:h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Download button -->
+              <a
+                href={transcription.audio.url}
+                download
+                class="mt-3 sm:mt-4 w-full flex items-center justify-center gap-2 bg-white border border-primary/30 text-primary px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary active:scale-95"
+              >
+                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Download Audio
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div class="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8">
+
+        <!-- ============ SIDEBAR ============ -->
+        <aside class="lg:sticky lg:top-6 self-start">
+          <div class="bg-white rounded-xl border border-text-body/10 shadow-sm overflow-hidden">
+
+            <!-- Audio Player (Desktop only) -->
             {transcription.audio.available && (
-              <div class="p-4 border-t border-text-body/10">
-                <h3 class="text-sm font-bold text-text-body mb-3 px-2 hidden lg:block">Audio Player</h3>
+              <div class="hidden lg:block p-4">
+                <h3 class="text-sm font-bold text-text-body mb-3 px-2">Audio Player</h3>
                 
                 <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-3 sm:p-4 border border-primary/20">
                   <!-- Waveform visualization placeholder -->
@@ -272,14 +331,11 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
                     Download Audio
                   </a>
                 </div>
-
-                <!-- Hidden audio element -->
-                <audio id="audio-element" src={transcription.audio.url} preload="metadata"></audio>
               </div>
             )}
 
-            <!-- Share Button -->
-            <div class="p-4 border-t border-text-body/10">
+            <!-- Share Button (Desktop only) -->
+            <div class="hidden lg:block p-4 border-t border-text-body/10">
               <button
                 type="button"
                 class="w-full flex items-center justify-center gap-2 bg-white border border-text-body/20 text-text-body px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 hover:border-primary hover:text-primary active:scale-95"
@@ -294,12 +350,12 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
         </aside>
 
         <!-- ============ PAGE CONTENT ============ -->
-        <main class="order-1 lg:order-2">
+        <main>
           <div class="space-y-4 sm:space-y-6">
             {pages.map((page) => (
               <div
                 id={`page-${page.pageNum}`}
-                class="page-content bg-white rounded-xl border border-text-body/10 shadow-sm p-4 sm:p-6 lg:p-8 scroll-mt-6"
+                class="page-content bg-white rounded-xl border border-text-body/10 shadow-sm p-4 sm:p-6 lg:p-8"
               >
                 <!-- Page number badge -->
                 <div class="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-text-body/10">
@@ -370,73 +426,17 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
         </main>
 
       </div>
+
+      <!-- Hidden audio element -->
+      {transcription.audio.available && (
+        <audio id="audio-element" src={transcription.audio.url} preload="metadata"></audio>
+      )}
     </div>
   </section>
 
 </Layout>
 
 <script>
-// ============ MOBILE NAV TOGGLE ============
-const mobileNavToggle = document.getElementById('mobile-nav-toggle');
-const mobileNavContent = document.getElementById('mobile-nav-content');
-const navChevron = document.getElementById('nav-chevron');
-
-mobileNavToggle?.addEventListener('click', () => {
-  const isHidden = mobileNavContent.classList.contains('hidden');
-  
-  if (isHidden) {
-    mobileNavContent.classList.remove('hidden');
-    navChevron.style.transform = 'rotate(180deg)';
-  } else {
-    mobileNavContent.classList.add('hidden');
-    navChevron.style.transform = 'rotate(0deg)';
-  }
-});
-
-// ============ PAGE NAVIGATION ============
-const pageLinks = document.querySelectorAll('.page-link');
-const pageContents = document.querySelectorAll('.page-content');
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const pageNum = entry.target.id.replace('page-', '');
-      pageLinks.forEach(link => {
-        if (link.dataset.page === pageNum) {
-          link.classList.add('bg-primary', 'text-white');
-          link.classList.remove('text-text-body/60');
-        } else {
-          link.classList.remove('bg-primary', 'text-white');
-          link.classList.add('text-text-body/60');
-        }
-      });
-    }
-  });
-}, {
-  threshold: 0.5,
-  rootMargin: '-100px 0px -50% 0px'
-});
-
-pageContents.forEach(content => observer.observe(content));
-
-pageLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetId = link.getAttribute('href');
-    const target = document.querySelector(targetId);
-    
-    // Close mobile nav if open
-    if (window.innerWidth < 1024) {
-      mobileNavContent?.classList.add('hidden');
-      if (navChevron) navChevron.style.transform = 'rotate(0deg)';
-    }
-    
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-
 // ============ AUDIO PLAYER ============
 const audio = document.getElementById('audio-element');
 const playPauseBtn = document.getElementById('play-pause-btn');
