@@ -1,0 +1,436 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout page="calendar">
+  <!-- ================= CALENDAR HERO ================= -->
+  <section class="w-full bg-section-bg">
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-5 lg:px-6 py-8 sm:py-12 lg:py-16 text-center"
+    >
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
+        Spiritual Calendar
+      </h1>
+      <p
+        class="text-text-body text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto"
+      >
+        Events, festivals, and discourses by Bhakti Prema Swami
+      </p>
+    </div>
+  </section>
+
+  <div class="h-2 sm:h-3 lg:h-4 bg-primary-hover"></div>
+
+  <!-- ================= SIMPLE CALENDAR ================= -->
+  <section class="bg-white py-8 sm:py-12 lg:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-5 lg:px-6">
+      <!-- Month Selector -->
+      <div class="flex justify-between items-center mb-8">
+        <button class="p-2 hover:bg-gray-100 rounded-lg">
+          <span class="material-icons text-primary">chevron_left</span>
+        </button>
+
+        <div class="text-center">
+          <h2 class="text-2xl sm:text-3xl font-bold text-primary">
+            December 2024
+          </h2>
+          <p class="text-text-body">Spiritual Events & Festivals</p>
+        </div>
+
+        <button class="p-2 hover:bg-gray-100 rounded-lg">
+          <span class="material-icons text-primary">chevron_right</span>
+        </button>
+      </div>
+
+      <!-- Week Days -->
+      <div class="grid grid-cols-7 gap-2 mb-4">
+        {
+          ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+            <div class="text-center font-semibold text-primary p-2">{day}</div>
+          ))
+        }
+      </div>
+
+      <!-- Calendar Grid -->
+      <div class="grid grid-cols-7 gap-2">
+        <!-- Previous Month -->
+        {
+          [26, 27, 28, 29, 30].map((day) => (
+            <div class="text-center p-4 text-gray-400">{day}</div>
+          ))
+        }
+
+        <!-- December Days -->
+        {
+          [
+            { day: 1, event: "event", color: "bg-primary" },
+            { day: 2 },
+            { day: 3, event: "coffee", label: "Satsang", color: "bg-blue-100" },
+            { day: 4 },
+            { day: 5 },
+            { day: 6 },
+            {
+              day: 7,
+              event: "record_voice_over",
+              label: "Discourse",
+              color: "bg-blue-100",
+            },
+            { day: 8 },
+            { day: 9 },
+            {
+              day: 10,
+              event: "menu_book",
+              label: "Gita Class",
+              color: "bg-blue-100",
+            },
+            { day: 11 },
+            { day: 12 },
+            { day: 13 },
+            {
+              day: 14,
+              event: "record_voice_over",
+              label: "Discourse",
+              color: "bg-blue-100",
+            },
+            { day: 15 },
+            { day: 16 },
+            {
+              day: 17,
+              event: "coffee",
+              label: "Satsang",
+              color: "bg-blue-100",
+            },
+            { day: 18 },
+            {
+              day: 19,
+              event: "celebration",
+              label: "Gita Jayanti",
+              color: "bg-red-100",
+            },
+            { day: 20 },
+            {
+              day: 21,
+              event: "record_voice_over",
+              label: "Discourse",
+              color: "bg-blue-100",
+            },
+            {
+              day: 22,
+              event: "festival",
+              label: "Gaura Purnima",
+              color: "bg-yellow-100",
+            },
+            { day: 23 },
+            {
+              day: 24,
+              event: "menu_book",
+              label: "Gita Class",
+              color: "bg-blue-100",
+            },
+            { day: 25 },
+            { day: 26 },
+            { day: 27 },
+            {
+              day: 28,
+              event: "record_voice_over",
+              label: "Discourse",
+              color: "bg-blue-100",
+            },
+            { day: 29 },
+            { day: 30 },
+            {
+              day: 31,
+              event: "nightlife",
+              label: "New Year",
+              color: "bg-blue-100",
+            },
+          ].map(({ day, event, label, color }) => (
+            <div
+              class={`text-center p-3 rounded-lg ${color || ""} ${day === 1 ? "ring-2 ring-primary" : ""}`}
+            >
+              <div class="font-semibold text-lg">{day}</div>
+              {event && (
+                <div class="mt-1">
+                  <span class="material-icons text-sm">{event}</span>
+                  {label && <div class="text-xs mt-1">{label}</div>}
+                </div>
+              )}
+            </div>
+          ))
+        }
+
+        <!-- Next Month -->
+        {
+          [1, 2, 3, 4].map((day) => (
+            <div class="text-center p-4 text-gray-400">{day}</div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <div class="h-2 sm:h-3 lg:h-4 bg-primary-hover"></div>
+
+  <!-- ================= UPCOMING EVENTS ================= -->
+  <section class="bg-section-bg py-8 sm:py-12 lg:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-5 lg:px-6">
+      <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-8 text-center">
+        Upcoming Events
+      </h2>
+
+      <div class="space-y-6">
+        <!-- Event 1 -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="flex items-start justify-between">
+            <div class="flex items-start gap-4">
+              <div class="bg-red-50 p-3 rounded-lg">
+                <span class="material-icons text-red-600">celebration</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-primary">
+                  Gita Jayanti Celebration
+                </h3>
+                <p class="text-text-body mt-2">
+                  Special discourse on Bhagavad Gita
+                </p>
+                <div class="flex items-center gap-4 mt-3">
+                  <span class="flex items-center gap-1 text-sm">
+                    <span class="material-icons text-primary text-sm"
+                      >event</span
+                    >
+                    Dec 19, 2024
+                  </span>
+                  <span class="flex items-center gap-1 text-sm">
+                    <span class="material-icons text-primary text-sm"
+                      >schedule</span
+                    >
+                    7:00 PM
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button
+              class="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg"
+            >
+              Join
+            </button>
+          </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="flex items-start justify-between">
+            <div class="flex items-start gap-4">
+              <div class="bg-yellow-50 p-3 rounded-lg">
+                <span class="material-icons text-yellow-700">festival</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-primary">
+                  Gaura Purnima Festival
+                </h3>
+                <p class="text-text-body mt-2">
+                  Lord Chaitanya's appearance day celebration
+                </p>
+                <div class="flex items-center gap-4 mt-3">
+                  <span class="flex items-center gap-1 text-sm">
+                    <span class="material-icons text-primary text-sm"
+                      >event</span
+                    >
+                    Dec 22, 2024
+                  </span>
+                  <span class="flex items-center gap-1 text-sm">
+                    <span class="material-icons text-primary text-sm"
+                      >schedule</span
+                    >
+                    5:00 PM
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button
+              class="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg"
+            >
+              Join
+            </button>
+          </div>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="flex items-start justify-between">
+            <div class="flex items-start gap-4">
+              <div class="bg-blue-50 p-3 rounded-lg">
+                <span class="material-icons text-primary">menu_book</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-primary">
+                  Bhagavad Gita Chapter 2
+                </h3>
+                <p class="text-text-body mt-2">Weekly study session</p>
+                <div class="flex items-center gap-4 mt-3">
+                  <span class="flex items-center gap-1 text-sm">
+                    <span class="material-icons text-primary text-sm"
+                      >event</span
+                    >
+                    Dec 24, 2024
+                  </span>
+                  <span class="flex items-center gap-1 text-sm">
+                    <span class="material-icons text-primary text-sm"
+                      >schedule</span
+                    >
+                    6:30 PM
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button
+              class="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg"
+            >
+              Join
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="h-2 sm:h-3 lg:h-4 bg-primary-hover"></div>
+
+  <!-- ================= QUICK SCHEDULE ================= -->
+  <section class="bg-white py-8 sm:py-12 lg:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-5 lg:px-6">
+      <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-8 text-center">
+        Weekly Schedule
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- Mon, Wed -->
+        <div class="bg-section-bg rounded-xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="bg-primary p-2 rounded-lg">
+              <span class="material-icons text-white">coffee</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg">Morning Satsang</h3>
+              <p class="text-text-body text-sm">Mon & Wed</p>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <p class="flex items-center gap-2 text-sm">
+              <span class="material-icons text-primary text-sm">schedule</span>
+              9:30 AM - 10:00 AM
+            </p>
+            <p class="flex items-center gap-2 text-sm">
+              <span class="material-icons text-primary text-sm">language</span>
+              Bangla
+            </p>
+            <p class="flex items-center gap-2 text-sm">
+              <span class="material-icons text-primary text-sm">video_call</span
+              >
+              Zoom
+            </p>
+          </div>
+        </div>
+
+        <!-- Tue, Fri -->
+        <div class="bg-section-bg rounded-xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="bg-primary p-2 rounded-lg">
+              <span class="material-icons text-white">menu_book</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg">Gita Class</h3>
+              <p class="text-text-body text-sm">Tue & Fri</p>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <p class="flex items-center gap-2 text-sm">
+              <span class="material-icons text-primary text-sm">schedule</span>
+              2:30 PM - 3:00 PM
+            </p>
+            <p class="flex items-center gap-2 text-sm">
+              <span class="material-icons text-primary text-sm">language</span>
+              Hindi
+            </p>
+            <p class="flex items-center gap-2 text-sm">
+              <span class="material-icons text-primary text-sm"
+                >ondemand_video</span
+              >
+              YouTube Live
+            </p>
+          </div>
+        </div>
+
+        <!-- Saturday -->
+        <div class="bg-section-bg rounded-xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="bg-primary p-2 rounded-lg">
+              <span class="material-icons text-white">record_voice_over</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg">Weekly Discourse</h3>
+              <p class="text-text-body text-sm">Saturday</p>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <p class="flex items-center gap-2 text-sm">
+              <span class="material-icons text-primary text-sm">schedule</span>
+              4:00 PM - 5:30 PM
+            </p>
+            <p class="flex items-center gap-2 text-sm">
+              <span class="material-icons text-primary text-sm">groups</span>
+              Multiple Languages
+            </p>
+            <p class="flex items-center gap-2 text-sm">
+              <span class="material-icons text-primary text-sm"
+                >location_on</span
+              >
+              In-Person
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="h-2 sm:h-3 lg:h-4 bg-primary-hover"></div>
+
+  <!-- ================= SUBSCRIBE ================= -->
+  <section class="bg-section-bg py-8 sm:py-12 lg:py-16">
+    <div class="max-w-md mx-auto px-4 sm:px-5 lg:px-6 text-center">
+      <div class="bg-white rounded-2xl shadow-lg p-8">
+        <div
+          class="bg-primary p-3 rounded-full w-16 h-16 mx-auto mb-6 flex items-center justify-center"
+        >
+          <span class="material-icons text-white text-3xl">notifications</span>
+        </div>
+
+        <h3 class="text-2xl font-bold text-primary mb-4">Get Event Updates</h3>
+        <p class="text-text-body mb-6">
+          Stay updated with all spiritual programs
+        </p>
+
+        <div class="space-y-4">
+          <div class="relative">
+            <span
+              class="material-icons absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              >email</span
+            >
+            <input
+              type="email"
+              placeholder="Your email address"
+              class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+
+          <button
+            class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white py-3 rounded-lg font-semibold"
+          >
+            <span class="material-icons">send</span>
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

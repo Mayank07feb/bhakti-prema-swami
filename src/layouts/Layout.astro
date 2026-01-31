@@ -1,22 +1,68 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { seoData } from "../seoData.js";
+
+// Accept a "page" prop
+const { page = "default" } = Astro.props;
+
+// Safe fallback to default SEO if page key doesn't exist
+const seo = seoData[page] || seoData.default || {
+  meta_title: "Bhakti Prema Swami",
+  meta_description: "Official website of Bhakti Prema Swami.",
+};
+
+// Destructure meta data with guaranteed string fallback
+const title = seo.meta_title || "Bhakti Prema Swami";
+const description = seo.meta_description || "Official website of Bhakti Prema Swami.";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="../assets/images/favicon.png" />
+
+    <!-- Google Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- Google Pacifico Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://yourwebsite.com" />
+    <meta property="og:image" content="/assets/images/favicon.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+
+  <body class="min-h-screen font-sans text-gray-800 bg-white antialiased flex flex-col">
+
+    <!-- Header -->
+    <Header />
+
+    <!-- Page Content -->
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <Footer />
+
+  </body>
+</html>

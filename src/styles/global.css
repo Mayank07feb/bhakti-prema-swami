@@ -1,0 +1,38 @@
+/* ===============================
+   Google Fonts Import
+   =============================== */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+/* ===============================
+   Tailwind Import
+   =============================== */
+@import "tailwindcss";
+
+/* ===============================
+   Tailwind v4 Custom Theme Tokens
+   =============================== */
+@theme {
+  /* Brand Colors */
+  --color-primary: #a30f0f;
+  --color-primary-hover: #991B1B;
+
+  /* Text */
+  --color-text-body: #374151;
+
+  /* Section Background */
+  --color-section-bg: #F6E3D2;
+
+  /* ===============================
+     Header Gradient Colors
+     =============================== */
+  --color-header-from: #E5E7EB; /* gray-200 */
+  --color-header-via:  #F3F4F6; /* gray-100 */
+  --color-header-to:   #FFEDD5; /* orange-100 */
+}
+
+/* ===============================
+   Font Utilities
+   =============================== */
+.font-pacifico {
+  font-family: 'Pacifico', cursive;
+}

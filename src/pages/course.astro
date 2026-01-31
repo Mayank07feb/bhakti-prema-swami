@@ -1,0 +1,442 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout page="course">
+  <section class="bg-section-bg min-h-screen">
+    <!-- Page Header -->
+    <div
+      class="text-center py-8 sm:py-10 lg:py-12 xl:py-16 px-4 sm:px-5 lg:px-6"
+    >
+      <h1
+        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-3 sm:mb-4"
+      >
+        COURSE
+      </h1>
+      <div class="flex justify-center">
+        <span
+          class="w-20 sm:w-24 md:w-28 lg:w-32 h-0.5 sm:h-1 bg-primary rounded"
+        ></span>
+      </div>
+      <p
+        class="text-sm sm:text-base md:text-lg lg:text-xl text-text-body mt-4 sm:mt-5 lg:mt-6 max-w-2xl sm:max-w-3xl mx-auto"
+      >
+        Explore our spiritual courses and deepen your understanding of Krishna
+        Consciousness
+      </p>
+    </div>
+
+    <!-- Courses Grid -->
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-5 lg:px-6 py-6 sm:py-8 lg:py-10 xl:py-12"
+    >
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-14 lg:mb-16"
+      >
+        <!-- Course Card 1 -->
+        <div
+          class="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2"
+        >
+          <div class="relative h-48 sm:h-52 md:h-56">
+            <img
+              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop"
+              alt="Bhagavad Gita Course"
+              class="w-full h-full object-cover"
+            />
+            <div
+              class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold"
+            >
+              Beginner
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 lg:p-6">
+            <h3
+              class="text-lg sm:text-xl md:text-2xl font-bold text-text-body mb-2 sm:mb-3"
+            >
+              Bhagavad Gita Fundamentals
+            </h3>
+            <p class="text-sm sm:text-base text-text-body/80 mb-3 sm:mb-4">
+              Learn the core teachings of the Bhagavad Gita and apply them in
+              daily life.
+            </p>
+            <div
+              class="flex items-center justify-between text-xs sm:text-sm text-text-body/60 mb-3 sm:mb-4"
+            >
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+                  ></path>
+                </svg>
+                8 Weeks
+              </span>
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                  ></path>
+                </svg>
+                2.5k Students
+              </span>
+            </div>
+            <button
+              class="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors text-sm sm:text-base"
+            >
+              Enroll Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Course Card 2 -->
+        <div
+          class="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2"
+        >
+          <div class="relative h-48 sm:h-52 md:h-56">
+            <img
+              src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=600&h=400&fit=crop"
+              alt="Meditation Course"
+              class="w-full h-full object-cover"
+            />
+            <div
+              class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold"
+            >
+              All Levels
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 lg:p-6">
+            <h3
+              class="text-lg sm:text-xl md:text-2xl font-bold text-text-body mb-2 sm:mb-3"
+            >
+              Meditation & Mantra
+            </h3>
+            <p class="text-sm sm:text-base text-text-body/80 mb-3 sm:mb-4">
+              Master the art of meditation and mantra chanting for inner peace.
+            </p>
+            <div
+              class="flex items-center justify-between text-xs sm:text-sm text-text-body/60 mb-3 sm:mb-4"
+            >
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+                  ></path>
+                </svg>
+                6 Weeks
+              </span>
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                  ></path>
+                </svg>
+                3.2k Students
+              </span>
+            </div>
+            <button
+              class="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors text-sm sm:text-base"
+            >
+              Enroll Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Course Card 3 -->
+        <div
+          class="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2"
+        >
+          <div class="relative h-48 sm:h-52 md:h-56">
+            <img
+              src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop"
+              alt="Philosophy Course"
+              class="w-full h-full object-cover"
+            />
+            <div
+              class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold"
+            >
+              Intermediate
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 lg:p-6">
+            <h3
+              class="text-lg sm:text-xl md:text-2xl font-bold text-text-body mb-2 sm:mb-3"
+            >
+              Vedic Philosophy
+            </h3>
+            <p class="text-sm sm:text-base text-text-body/80 mb-3 sm:mb-4">
+              Deep dive into ancient Vedic wisdom and philosophical teachings.
+            </p>
+            <div
+              class="flex items-center justify-between text-xs sm:text-sm text-text-body/60 mb-3 sm:mb-4"
+            >
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+                  ></path>
+                </svg>
+                10 Weeks
+              </span>
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                  ></path>
+                </svg>
+                1.8k Students
+              </span>
+            </div>
+            <button
+              class="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors text-sm sm:text-base"
+            >
+              Enroll Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Course Card 4 -->
+        <div
+          class="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2"
+        >
+          <div class="relative h-48 sm:h-52 md:h-56">
+            <img
+              src="https://images.unsplash.com/photo-1604608672516-ab1b6a7e8fc6?w=600&h=400&fit=crop"
+              alt="Bhakti Yoga Course"
+              class="w-full h-full object-cover"
+            />
+            <div
+              class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold"
+            >
+              Advanced
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 lg:p-6">
+            <h3
+              class="text-lg sm:text-xl md:text-2xl font-bold text-text-body mb-2 sm:mb-3"
+            >
+              Bhakti Yoga Practice
+            </h3>
+            <p class="text-sm sm:text-base text-text-body/80 mb-3 sm:mb-4">
+              Advanced practices in the path of devotional yoga and service.
+            </p>
+            <div
+              class="flex items-center justify-between text-xs sm:text-sm text-text-body/60 mb-3 sm:mb-4"
+            >
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+                  ></path>
+                </svg>
+                12 Weeks
+              </span>
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                  ></path>
+                </svg>
+                1.2k Students
+              </span>
+            </div>
+            <button
+              class="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors text-sm sm:text-base"
+            >
+              Enroll Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Course Card 5 -->
+        <div
+          class="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2"
+        >
+          <div class="relative h-48 sm:h-52 md:h-56">
+            <img
+              src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&h=400&fit=crop"
+              alt="Sanskrit Course"
+              class="w-full h-full object-cover"
+            />
+            <div
+              class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold"
+            >
+              Beginner
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 lg:p-6">
+            <h3
+              class="text-lg sm:text-xl md:text-2xl font-bold text-text-body mb-2 sm:mb-3"
+            >
+              Sanskrit for Beginners
+            </h3>
+            <p class="text-sm sm:text-base text-text-body/80 mb-3 sm:mb-4">
+              Learn the sacred language of Sanskrit and understand sacred texts.
+            </p>
+            <div
+              class="flex items-center justify-between text-xs sm:text-sm text-text-body/60 mb-3 sm:mb-4"
+            >
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+                  ></path>
+                </svg>
+                16 Weeks
+              </span>
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                  ></path>
+                </svg>
+                950 Students
+              </span>
+            </div>
+            <button
+              class="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors text-sm sm:text-base"
+            >
+              Enroll Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Course Card 6 -->
+        <div
+          class="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2"
+        >
+          <div class="relative h-48 sm:h-52 md:h-56">
+            <img
+              src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=600&h=400&fit=crop"
+              alt="Srimad Bhagavatam Course"
+              class="w-full h-full object-cover"
+            />
+            <div
+              class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold"
+            >
+              Intermediate
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 lg:p-6">
+            <h3
+              class="text-lg sm:text-xl md:text-2xl font-bold text-text-body mb-2 sm:mb-3"
+            >
+              Srimad Bhagavatam Study
+            </h3>
+            <p class="text-sm sm:text-base text-text-body/80 mb-3 sm:mb-4">
+              Comprehensive study of the ancient scripture Srimad Bhagavatam.
+            </p>
+            <div
+              class="flex items-center justify-between text-xs sm:text-sm text-text-body/60 mb-3 sm:mb-4"
+            >
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+                  ></path>
+                </svg>
+                20 Weeks
+              </span>
+              <span class="flex items-center gap-1 sm:gap-2">
+                <svg
+                  class="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                  ></path>
+                </svg>
+                1.5k Students
+              </span>
+            </div>
+            <button
+              class="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors text-sm sm:text-base"
+            >
+              Enroll Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- See More Button -->
+      <div class="text-center py-6 sm:py-8 lg:py-10">
+        <button
+          class="bg-primary text-white px-8 sm:px-10 lg:px-12 py-3 sm:py-3.5 lg:py-4 rounded-full text-sm sm:text-base lg:text-lg font-semibold hover:bg-primary-hover transition-colors shadow-lg hover:shadow-xl"
+        >
+          View All Courses
+        </button>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div
+      class="bg-primary text-white py-12 sm:py-14 lg:py-16 xl:py-20 mt-12 sm:mt-16 lg:mt-20"
+    >
+      <div class="max-w-6xl mx-auto px-4 sm:px-5 lg:px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
+          <div class="mb-4 sm:mb-0">
+            <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
+              50+
+            </div>
+            <div class="text-sm sm:text-base md:text-lg">Courses Available</div>
+          </div>
+          <div class="mb-4 sm:mb-0">
+            <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
+              15k+
+            </div>
+            <div class="text-sm sm:text-base md:text-lg">Active Students</div>
+          </div>
+          <div>
+            <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
+              100%
+            </div>
+            <div class="text-sm sm:text-base md:text-lg">Free Education</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

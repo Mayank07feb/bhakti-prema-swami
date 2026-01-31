@@ -1,0 +1,468 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const transcriptions = [
+  { title: "Bhagavad-gītā Introduction",     date: "Feb. 19, 1966",  location: "New York" },
+  { title: "Bhagavad-gītā 2.7–11",           date: "March 2, 1966",  location: "New York" },
+  { title: "Bhagavad-gītā 2.11",             date: "March 4, 1966",  location: "New York" },
+  { title: "Bhagavad-gītā 2.12",             date: "March 7, 1966",  location: "New York" },
+  { title: "Bhagavad-gītā 2.12",             date: "March 9, 1966",  location: "New York" },
+  { title: "Bhagavad-gītā 2.13",             date: "March 11, 1966", location: "New York" },
+  { title: "Bhagavad-gītā 2.44–45",          date: "March 25, 1966", location: "New York" },
+  { title: "Bhagavad-gītā 2.46–47",          date: "March 28, 1966", location: "New York" },
+  { title: "Purport to Bhajahū Re Mana",     date: "March 30, 1966", location: "New York" },
+  { title: "Bhagavad-gītā 2.48–49",          date: "April 1, 1966",  location: "New York" },
+  { title: "Bhagavad-gītā 2.49–51",          date: "April 5, 1966",  location: "New York" },
+  { title: "Bhagavad-gītā 2.51–55",          date: "April 6, 1966",  location: "New York" },
+];
+
+const audioFilters = [
+  { label: "Has audio", count: 3714 },
+  { label: "No audio", count: 22   },
+];
+
+const typeFilters = [
+  { label: "Conversation",                      count: 976 },
+  { label: "Srimad-Bhagavatam",                 count: 949 },
+  { label: "Walk",                              count: 519 },
+  { label: "Bhagavad-gita",                     count: 460 },
+  { label: "Lectures and Addresses",            count: 400 },
+  { label: "Caitanya-caritamrita",              count: 126 },
+  { label: "Initiation",                        count: 80  },
+  { label: "Nectar of Devotion",                count: 46  },
+  { label: "Interview",                         count: 39  },
+  { label: "Other",                             count: 38  },
+  { label: "Purport",                           count: 21  },
+  { label: "Appearance and Disappearance days", count: 26  },
+  { label: "Sri Isopanisad",                    count: 36  },
+  { label: "Sri Brahma Samhita",                count: 18  },
+];
+
+const yearFilters = [
+  { label: "1966", count: 122 },
+  { label: "1967", count: 48  },
+  { label: "1968", count: 162 },
+  { label: "1969", count: 148 },
+  { label: "1970", count: 88  },
+  { label: "1971", count: 227 },
+  { label: "1972", count: 423 },
+  { label: "1973", count: 419 },
+  { label: "1974", count: 439 },
+  { label: "1975", count: 363 },
+  { label: "1976", count: 707 },
+  { label: "1977", count: 367 },
+];
+
+const locationFilters = [
+  { label: "Vrindavana",       count: 533 },
+  { label: "Los Angeles",      count: 346 },
+  { label: "Bombay",           count: 443 },
+  { label: "Mayapur",          count: 246 },
+  { label: "New York",         count: 255 },
+  { label: "London",           count: 197 },
+  { label: "Honolulu",         count: 127 },
+  { label: "Hyderabad",        count: 90  },
+  { label: "San Francisco",    count: 82  },
+  { label: "Delhi",            count: 77  },
+  { label: "New Vrindavan",    count: 66  },
+  { label: "Calcutta",         count: 58  },
+  { label: "Melbourne",        count: 58  },
+  { label: "Montreal",         count: 56  },
+  { label: "Paris",            count: 55  },
+  { label: "Bhubaneswar",      count: 50  },
+  { label: "Detroit",          count: 34  },
+  { label: "Boston",           count: 27  },
+  { label: "Tokyo",            count: 25  },
+  { label: "Gorakhpur",        count: 23  },
+  { label: "Tehran",           count: 20  },
+  { label: "Chicago",          count: 28  },
+  { label: "Washington, D.C.", count: 27  },
+  { label: "Surat",            count: 23  },
+  { label: "Allahabad",        count: 19  },
+  { label: "Geneva",           count: 20  },
+  { label: "Nairobi",          count: 22  },
+  { label: "Perth",            count: 21  },
+  { label: "Ahmedabad",        count: 20  },
+  { label: "New Mayapur",      count: 20  },
+  { label: "Seattle",          count: 20  },
+  { label: "Johannesburg",     count: 19  },
+  { label: "Toronto",          count: 19  },
+  { label: "Jakarta",          count: 18  },
+  { label: "Dallas",           count: 17  },
+  { label: "Rome",             count: 16  },
+  { label: "Durban",           count: 13  },
+  { label: "Mauritius",        count: 13  },
+  { label: "Mexico City",      count: 12  },
+  { label: "Stockholm",        count: 10  },
+];
+
+const allFilters = [
+  { id: "audio",    label: "Audio",    items: audioFilters    },
+  { id: "type",     label: "Type",     items: typeFilters     },
+  { id: "year",     label: "Year",     items: yearFilters     },
+  { id: "location", label: "Location", items: locationFilters },
+];
+---
+
+<Layout page="transcriptions">
+
+  <!-- ================= PAGE HEADER ================= -->
+  <section class="bg-white py-10 sm:py-14 lg:py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <h1 class="font-pacifico text-4xl sm:text-5xl lg:text-6xl text-primary mb-4">
+        Transcriptions
+      </h1>
+      <span class="block w-20 h-1 bg-primary rounded-full"></span>
+    </div>
+  </section>
+
+  <!-- ── Strip divider ── -->
+  <div class="h-2 bg-primary-hover"></div>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <section class="bg-section-bg min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10 lg:py-12">
+
+      <!-- ============ FILTER BAR ============ -->
+      <div class="flex flex-wrap gap-2.5 sm:gap-3 mb-3" id="filter-bar">
+        {allFilters.map((filter) => (
+          <div class="relative" data-dropdown>
+
+            <!-- Trigger pill -->
+            <button
+              data-toggle
+              aria-expanded="false"
+              class="inline-flex items-center gap-2 bg-white border border-text-body/20 text-text-body px-4 py-2 rounded-full text-sm font-semibold shadow-sm cursor-pointer transition-all duration-200 hover:border-primary hover:text-primary hover:shadow-md"
+            >
+              <span data-btn-label>{filter.label}</span>
+              <svg data-chevron class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <!-- ── Dropdown panel ── -->
+            <div
+              data-panel
+              class="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl border border-text-body/10 shadow-xl z-50 overflow-hidden"
+              style="opacity:0;transform:translateY(-6px) scale(0.97);pointer-events:none;transition:opacity .2s ease,transform .2s ease;"
+            >
+              <!-- Header -->
+              <div class="flex items-center justify-between px-4 py-2.5 bg-primary">
+                <h3 class="text-white text-sm font-semibold tracking-wide">
+                  Filter by {filter.label}
+                </h3>
+                <span data-badge class="hidden text-xs font-bold text-white bg-white/20 px-2 py-0.5 rounded-full">0</span>
+              </div>
+
+              <!-- Checkbox list -->
+              <div class="max-h-56 overflow-y-auto py-1" data-item-list>
+                {filter.items.map((f) => (
+                  <button
+                    type="button"
+                    data-filter-item
+                    class="w-full flex items-center gap-3 px-4 py-2 text-left cursor-pointer transition-colors duration-150 hover:bg-orange-50"
+                  >
+                    <!-- checkbox -->
+                    <span
+                      data-checkbox
+                      class="flex-shrink-0 border-2 border-text-body/25 bg-white rounded flex items-center justify-center transition-all duration-150"
+                      style="width:18px;height:18px;"
+                    >
+                      <svg data-checkmark class="hidden text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" style="width:11px;height:11px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                      </svg>
+                    </span>
+
+                    <!-- label -->
+                    <span class="flex-1 text-text-body text-sm font-medium">{f.label}</span>
+
+                    <!-- count -->
+                    <span class="text-xs font-semibold text-text-body/50 bg-section-bg px-2 py-0.5 rounded-full">{f.count}</span>
+                  </button>
+                ))}
+              </div>
+
+              <!-- Footer: Clear + Apply -->
+              <div class="flex gap-2 px-3 py-3 border-t border-text-body/10">
+                <button
+                  type="button"
+                  data-clear-btn
+                  class="flex-shrink-0 px-4 py-1.5 border border-text-body/20 rounded-lg text-xs font-semibold text-text-body/60 cursor-pointer transition-all duration-150 hover:border-primary hover:text-primary"
+                >
+                  Clear
+                </button>
+                <button
+                  type="button"
+                  data-apply-btn
+                  class="flex-1 px-4 py-1.5 bg-primary rounded-lg text-xs font-bold text-white cursor-pointer transition-all duration-150 hover:bg-primary-hover hover:shadow-md"
+                >
+                  Apply
+                </button>
+              </div>
+            </div>
+
+          </div>
+        ))}
+      </div>
+
+      <!-- ============ ACTIVE TAGS ROW ============ -->
+      <div id="active-tags-row" class="flex flex-wrap gap-2 mb-4 items-center" style="min-height:28px;"></div>
+
+      <!-- ============ RECORD COUNT ============ -->
+      <p class="text-sm text-text-body/60 mb-6 sm:mb-7">
+        Found <span class="font-bold text-text-body" id="record-count">3736</span> records
+      </p>
+
+      <!-- ============ TRANSCRIPTION LIST ============ -->
+      <div class="max-w-3xl">
+
+        {transcriptions.map((item, idx) => (
+          <a
+            href="#"
+            class="group flex flex-col sm:flex-row sm:items-center justify-between py-4 border-b border-text-body/15 transition-all duration-200 hover:pl-3"
+          >
+            <!-- Left -->
+            <div class="flex flex-col gap-0.5">
+              <div class="flex items-baseline gap-2.5">
+                <span class="text-xs font-bold text-text-body/25 shrink-0" style="width:20px;text-align:right;font-variant-numeric:tabular-nums;">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <span class="text-base sm:text-lg font-semibold text-primary group-hover:text-primary-hover transition-colors duration-150">
+                  {item.title}
+                </span>
+              </div>
+              <div class="flex items-center gap-1.5" style="margin-left:28px;">
+                <span class="text-xs text-text-body/45">{item.date}</span>
+                <span class="text-text-body/25">·</span>
+                <span class="text-xs text-text-body/45">{item.location}</span>
+              </div>
+            </div>
+
+            <!-- Right: chevron -->
+            <svg
+              class="hidden sm:block w-5 h-5 text-text-body/20 group-hover:text-primary transition-all duration-200 group-hover:scale-110 shrink-0"
+              fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        ))}
+
+        <!-- ============ PAGINATION ============ -->
+        <div class="mt-10 sm:mt-12 flex items-center justify-center gap-3">
+
+          <!-- Back -->
+          <a
+            href="#"
+            class="inline-flex items-center gap-2 bg-white border border-text-body/20 text-text-body/60 px-5 sm:px-6 py-2.5 rounded-full text-sm font-semibold shadow-sm cursor-pointer transition-all duration-200 hover:border-primary hover:text-primary hover:shadow-md"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Back
+          </a>
+
+          <!-- Next -->
+          <a
+            href="#"
+            class="inline-flex items-center gap-2 bg-primary text-white px-5 sm:px-6 py-2.5 rounded-full text-sm font-semibold shadow-sm cursor-pointer transition-all duration-200 hover:bg-primary-hover hover:shadow-lg"
+          >
+            Next
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>
+
+<!-- ================= DROPDOWN + TAG LOGIC ================= -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Read theme colours at runtime so we never hardcode
+  const root      = document.documentElement;
+  const cs        = getComputedStyle(root);
+  const PRIMARY   = cs.getPropertyValue("--color-primary").trim()       || "#a30f0f";
+  const SECTION   = cs.getPropertyValue("--color-section-bg").trim()    || "#F6E3D2";
+
+  const dropdowns = document.querySelectorAll("[data-dropdown]");
+  const state     = new Map(); // dd → { pending: Set<number>, applied: Set<number> }
+
+  // ── store original label text once ──
+  dropdowns.forEach((dd) => {
+    const lbl = dd.querySelector("[data-btn-label]");
+    lbl.dataset.original = lbl.textContent.trim();
+  });
+
+  dropdowns.forEach((dd) => {
+    state.set(dd, { pending: new Set(), applied: new Set() });
+
+    const trigger  = dd.querySelector("[data-toggle]");
+    const panel    = dd.querySelector("[data-panel]");
+    const chevron  = dd.querySelector("[data-chevron]");
+    const badge    = dd.querySelector("[data-badge]");
+    const items    = dd.querySelectorAll("[data-filter-item]");
+    const applyBtn = dd.querySelector("[data-apply-btn]");
+    const clearBtn = dd.querySelector("[data-clear-btn]");
+
+    // ── open / close ──
+    function openPanel() {
+      panel.style.opacity       = "1";
+      panel.style.transform     = "translateY(0) scale(1)";
+      panel.style.pointerEvents = "auto";
+      chevron.style.transform   = "rotate(180deg)";
+      trigger.setAttribute("aria-expanded", "true");
+    }
+    function closePanel() {
+      panel.style.opacity       = "0";
+      panel.style.transform     = "translateY(-6px) scale(0.97)";
+      panel.style.pointerEvents = "none";
+      chevron.style.transform   = "rotate(0deg)";
+      trigger.setAttribute("aria-expanded", "false");
+    }
+
+    // ── sync checkboxes ↔ pending set ──
+    function syncCheckboxes() {
+      const s = state.get(dd);
+      items.forEach((item, i) => {
+        const cb   = item.querySelector("[data-checkbox]");
+        const tick = item.querySelector("[data-checkmark]");
+        if (s.pending.has(i)) {
+          cb.style.background  = PRIMARY;
+          cb.style.borderColor = PRIMARY;
+          tick.classList.remove("hidden");
+          item.style.background = SECTION;
+        } else {
+          cb.style.background  = "#fff";
+          cb.style.borderColor = "";
+          tick.classList.add("hidden");
+          item.style.background = "";
+        }
+      });
+      badge.textContent = s.pending.size;
+      badge.classList.toggle("hidden", s.pending.size === 0);
+    }
+
+    // ── trigger click ──
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = panel.style.pointerEvents === "auto";
+      closeAllExcept(dd);
+      if (isOpen) {
+        closePanel();
+      } else {
+        state.get(dd).pending = new Set(state.get(dd).applied);
+        syncCheckboxes();
+        openPanel();
+      }
+    });
+
+    // ── checkbox toggle ──
+    items.forEach((item, i) => {
+      item.addEventListener("click", () => {
+        const s = state.get(dd);
+        s.pending.has(i) ? s.pending.delete(i) : s.pending.add(i);
+        syncCheckboxes();
+      });
+    });
+
+    // ── Apply ──
+    applyBtn.addEventListener("click", () => {
+      const s = state.get(dd);
+      s.applied = new Set(s.pending);
+      refreshTrigger(dd);
+      renderTags();
+      closePanel();
+    });
+
+    // ── Clear ──
+    clearBtn.addEventListener("click", () => {
+      state.get(dd).pending.clear();
+      syncCheckboxes();
+    });
+
+    dd._close = closePanel;
+  });
+
+  // ── close all except one ──
+  function closeAllExcept(except) {
+    dropdowns.forEach((dd) => { if (dd !== except) dd._close(); });
+  }
+
+  // ── refresh trigger pill appearance ──
+  function refreshTrigger(dd) {
+    const trigger = dd.querySelector("[data-toggle]");
+    const lbl     = dd.querySelector("[data-btn-label]");
+    const s       = state.get(dd);
+    const items   = dd.querySelectorAll("[data-filter-item]");
+
+    if (s.applied.size > 0) {
+      const first = [...s.applied]
+        .map(i => items[i].querySelector("span.flex-1").textContent.trim())[0];
+      lbl.textContent           = s.applied.size === 1 ? first : first + " +" + (s.applied.size - 1);
+      trigger.style.background  = PRIMARY;
+      trigger.style.borderColor = PRIMARY;
+      trigger.style.color       = "#fff";
+    } else {
+      lbl.textContent           = lbl.dataset.original;
+      trigger.style.background  = "#fff";
+      trigger.style.borderColor = "";
+      trigger.style.color       = "";
+    }
+  }
+
+  // ── render active-filter tags ──
+  function renderTags() {
+    const row = document.getElementById("active-tags-row");
+    row.innerHTML = "";
+
+    dropdowns.forEach((dd) => {
+      const s     = state.get(dd);
+      const items = dd.querySelectorAll("[data-filter-item]");
+      const cat   = dd.querySelector("[data-btn-label]").dataset.original;
+
+      s.applied.forEach((idx) => {
+        const name = items[idx].querySelector("span.flex-1").textContent.trim();
+
+        const tag = document.createElement("span");
+        tag.className = "inline-flex items-center gap-1.5 text-white text-xs font-semibold px-3 py-1 rounded-full";
+        tag.style.background = PRIMARY;
+
+        tag.innerHTML =
+          '<span>' + cat + ': ' + name + '</span>' +
+          '<button type="button" data-remove-tag' +
+            ' class="flex items-center justify-center rounded-full bg-white/25 hover:bg-white/40 transition-colors cursor-pointer border-0 p-0"' +
+            ' style="width:16px;height:16px;">' +
+            '<svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" style="width:9px;height:9px;color:#fff;">' +
+              '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>' +
+            '</svg>' +
+          '</button>';
+
+        tag.querySelector("[data-remove-tag]").addEventListener("click", () => {
+          s.applied.delete(idx);
+          refreshTrigger(dd);
+          renderTags();
+        });
+
+        row.appendChild(tag);
+      });
+    });
+  }
+
+  // ── outside click ──
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("[data-dropdown]")) closeAllExcept(null);
+  });
+
+  // ── Escape ──
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAllExcept(null);
+  });
+});
+</script>

@@ -1,0 +1,147 @@
+<header class="w-full">
+  <!-- Top Red Strip -->
+  <div class="h-4 bg-primary"></div>
+
+  <!-- Main Header -->
+  <div class="bg-gradient-to-r from-[var(--color-header-from)] via-[var(--color-header-via)] to-[var(--color-header-to)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 relative flex items-center justify-between">
+
+      <!-- Mobile Menu Button -->
+      <div class="lg:hidden">
+        <button id="mobileMenuBtn" class="text-gray-700 hover:text-primary focus:outline-none">
+          <span id="menuIcon" class="material-icons text-3xl">menu</span>
+        </button>
+      </div>
+
+      <!-- Left Menu (Desktop) -->
+      <nav class="hidden lg:flex items-center space-x-5 text-base font-semibold">
+
+        <!-- HOME -->
+        <a href="/" class="nav-link text-gray-700 hover:text-primary" data-path="/">
+          HOME
+        </a>
+
+        <span class="text-gray-400 text-lg">|</span>
+
+        <!-- ABOUT Dropdown -->
+        <div class="relative group">
+          <a href="/about" class="nav-link flex items-center gap-1" data-path="/about">
+            ABOUT
+            <span class="material-icons text-lg transition-transform duration-200 group-hover:rotate-180">
+              expand_more
+            </span>
+          </a>
+
+          <!-- Dropdown -->
+          <div
+            class="absolute left-0 top-full mt-3 w-64 bg-white shadow-xl rounded-md
+                   opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                   transition-all duration-200 z-50"
+          >
+            <a href="/srila-prabhupada" class="block px-5 py-3 text-sm hover:bg-gray-100">
+              Srila Prabhupada
+            </a>
+
+            <a href="/bhakti-charu-swami" class="block px-5 py-3 text-sm hover:bg-gray-100">
+              HH Bhakti Charu Swami Maharaja
+            </a>
+
+            <a href="/bhakti-prema-swami" class="block px-5 py-3 text-sm hover:bg-gray-100">
+              Bhakti Prema Swami
+            </a>
+          </div>
+        </div>
+
+        <span class="text-gray-400 text-lg">|</span>
+
+        <a href="/media" class="nav-link text-gray-700 hover:text-primary" data-path="/media">
+          MEDIA
+        </a>
+
+        <span class="text-gray-400 text-lg">|</span>
+
+        <a href="/books" class="nav-link text-gray-700 hover:text-primary" data-path="/books">
+          BOOKS
+        </a>
+      </nav>
+
+      <!-- Center Logo -->
+      <div class="absolute left-1/2 transform -translate-x-1/2">
+        <a href="/">
+          <img src="../assets/images/logo.png" class="w-48 h-48 object-contain" />
+        </a>
+      </div>
+
+      <!-- Right Menu -->
+      <nav class="hidden lg:flex items-center space-x-5 text-base font-semibold">
+        <a href="/connect" class="nav-link" data-path="/connect">CONNECT</a>
+        <span class="text-gray-400 text-lg">|</span>
+        <a href="/calendar" class="nav-link" data-path="/calendar">CALENDAR</a>
+        <span class="text-gray-400 text-lg">|</span>
+        <a href="/course" class="nav-link" data-path="/course">COURSE</a>
+      </nav>
+
+      <div class="lg:hidden invisible">
+        <span class="material-icons text-3xl">menu</span>
+      </div>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white shadow-lg py-4">
+      <div class="px-6 flex flex-col space-y-4">
+
+        <a href="/" class="mobile-nav-link font-semibold">HOME</a>
+
+        <!-- Mobile ABOUT Dropdown -->
+        <button id="mobileAboutBtn" class="flex justify-between items-center font-semibold text-lg">
+          ABOUT
+          <span id="mobileAboutIcon" class="material-icons transition-transform">
+            expand_more
+          </span>
+        </button>
+
+        <div id="mobileAboutMenu" class="hidden ml-4 flex flex-col space-y-2">
+          <a href="/srila-prabhupada" class="mobile-nav-link">Srila Prabhupada</a>
+          <a href="/bhakti-charu-swami" class="mobile-nav-link">HH Bhakti Charu Swami Maharaja</a>
+          <a href="/bhakti-prema-swami" class="mobile-nav-link">Bhakti Prema Swami</a>
+        </div>
+
+        <a href="/media" class="mobile-nav-link font-semibold">MEDIA</a>
+        <a href="/books" class="mobile-nav-link font-semibold">BOOKS</a>
+        <a href="/connect" class="mobile-nav-link font-semibold">CONNECT</a>
+        <a href="/calendar" class="mobile-nav-link font-semibold">CALENDAR</a>
+        <a href="/course" class="mobile-nav-link font-semibold">COURSE</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const menuIcon = document.getElementById("menuIcon");
+
+  const mobileAboutBtn = document.getElementById("mobileAboutBtn");
+  const mobileAboutMenu = document.getElementById("mobileAboutMenu");
+  const mobileAboutIcon = document.getElementById("mobileAboutIcon");
+
+  mobileMenuBtn.onclick = () => {
+    mobileMenu.classList.toggle("hidden");
+    menuIcon.textContent = mobileMenu.classList.contains("hidden") ? "menu" : "close";
+  };
+
+  mobileAboutBtn.onclick = () => {
+    mobileAboutMenu.classList.toggle("hidden");
+    mobileAboutIcon.classList.toggle("rotate-180");
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const path = window.location.pathname.replace(/\/$/, "") || "/";
+    document.querySelectorAll(".nav-link").forEach(link => {
+      if (link.dataset.path === path) {
+        link.classList.add("text-primary");
+        link.classList.remove("text-gray-700");
+      }
+    });
+  });
+</script>
