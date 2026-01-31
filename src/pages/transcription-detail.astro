@@ -69,22 +69,22 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
 <Layout page="transcription-detail">
 
   <!-- ================= PAGE HEADER ================= -->
-  <section class="bg-white py-10 sm:py-14 lg:py-16">
+  <section class="bg-white py-6 sm:py-8 lg:py-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <!-- Breadcrumb -->
-      <nav class="mb-6 flex items-center gap-2 text-sm text-text-body/60">
-        <a href="/transcriptions" class="hover:text-primary transition-colors">Transcriptions</a>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <nav class="mb-4 sm:mb-6 flex items-center gap-2 text-xs sm:text-sm text-text-body/60">
+        <a href="/transcriptions" class="hover:text-primary transition-colors truncate">Transcriptions</a>
+        <svg class="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
         </svg>
-        <span class="text-text-body font-medium">{transcription.title}</span>
+        <span class="text-text-body font-medium truncate">{transcription.title}</span>
       </nav>
 
-      <h1 class="font-pacifico text-3xl sm:text-4xl lg:text-5xl text-primary mb-4">
+      <h1 class="font-pacifico text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary mb-3 sm:mb-4 break-words">
         {transcription.title}
       </h1>
       
-      <span class="block w-20 h-1 bg-primary rounded-full"></span>
+      <span class="block w-16 sm:w-20 h-1 bg-primary rounded-full"></span>
     </div>
   </section>
 
@@ -93,61 +93,96 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
 
   <!-- ================= MAIN CONTENT ================= -->
   <section class="bg-section-bg min-h-screen">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10 lg:py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 lg:py-12">
 
-      <div class="grid lg:grid-cols-[240px_1fr] gap-8">
-        <!-- Meta info -->
-        <div class="flex flex-wrap items-center gap-4 text-sm text-text-body/70 mb-4 lg:col-span-2">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-            <span>{transcription.date}</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-            <span>{transcription.location}</span>
-          </div>
-          {transcription.audio.available && (
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-              </svg>
-              <span class="text-primary font-medium">{transcription.audio.duration}</span>
-            </div>
-          )}
+      <!-- Meta info -->
+      <div class="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-text-body/70 mb-6 sm:mb-8">
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <span>{transcription.date}</span>
         </div>
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          <span>{transcription.location}</span>
+        </div>
+        {transcription.audio.available && (
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 text-primary" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+            </svg>
+            <span class="text-primary font-medium">{transcription.audio.duration}</span>
+          </div>
+        )}
+      </div>
+
+      <div class="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8">
 
         <!-- ============ SIDEBAR NAVIGATION ============ -->
-        <aside class="lg:sticky lg:top-6 self-start">
-          <div class="bg-white rounded-xl border border-text-body/10 shadow-sm p-4">
-            <h3 class="text-sm font-bold text-text-body mb-3 px-2">Pages</h3>
-            <nav class="space-y-1" id="page-nav">
-              {pages.map((page) => (
-                <a
-                  href={`#page-${page.pageNum}`}
-                  class="page-link block px-3 py-2 text-sm font-medium text-text-body/60 rounded-lg transition-all duration-150 hover:bg-orange-50 hover:text-primary"
-                  data-page={page.pageNum}
-                >
-                  Page {page.pageNum}
-                </a>
-              ))}
-            </nav>
+        <aside class="lg:sticky lg:top-6 self-start order-2 lg:order-1">
+          <div class="bg-white rounded-xl border border-text-body/10 shadow-sm overflow-hidden">
+            
+            <!-- Mobile: Collapsible Navigation -->
+            <div class="lg:hidden">
+              <button
+                id="mobile-nav-toggle"
+                type="button"
+                class="w-full flex items-center justify-between p-4 text-left bg-gradient-to-r from-orange-50 to-amber-50 border-b border-primary/10"
+              >
+                <span class="text-sm font-bold text-text-body">Table of Contents</span>
+                <svg id="nav-chevron" class="w-5 h-5 text-primary transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div id="mobile-nav-content" class="hidden">
+                <div class="p-4">
+                  <h3 class="text-xs font-bold text-text-body/70 mb-2 px-2">PAGES</h3>
+                  <nav class="space-y-1" id="page-nav-mobile">
+                    {pages.map((page) => (
+                      <a
+                        href={`#page-${page.pageNum}`}
+                        class="page-link block px-3 py-2 text-sm font-medium text-text-body/60 rounded-lg transition-all duration-150 hover:bg-orange-50 hover:text-primary active:bg-orange-100"
+                        data-page={page.pageNum}
+                      >
+                        Page {page.pageNum}
+                      </a>
+                    ))}
+                  </nav>
+                </div>
+              </div>
+            </div>
+
+            <!-- Desktop: Always visible navigation -->
+            <div class="hidden lg:block p-4">
+              <h3 class="text-sm font-bold text-text-body mb-3 px-2">Pages</h3>
+              <nav class="space-y-1" id="page-nav">
+                {pages.map((page) => (
+                  <a
+                    href={`#page-${page.pageNum}`}
+                    class="page-link block px-3 py-2 text-sm font-medium text-text-body/60 rounded-lg transition-all duration-150 hover:bg-orange-50 hover:text-primary"
+                    data-page={page.pageNum}
+                  >
+                    Page {page.pageNum}
+                  </a>
+                ))}
+              </nav>
+            </div>
 
             <!-- Audio Player (if available) -->
             {transcription.audio.available && (
-              <div class="mt-6 pt-6 border-t border-text-body/10">
-                <h3 class="text-sm font-bold text-text-body mb-3 px-2">Audio Player</h3>
+              <div class="p-4 border-t border-text-body/10">
+                <h3 class="text-sm font-bold text-text-body mb-3 px-2 hidden lg:block">Audio Player</h3>
                 
-                <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 border border-primary/20">
+                <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-3 sm:p-4 border border-primary/20">
                   <!-- Waveform visualization placeholder -->
-                  <div class="flex items-center justify-center gap-1 h-16 mb-3">
-                    {Array.from({ length: 40 }).map((_, i) => (
+                  <div class="flex items-center justify-center gap-0.5 sm:gap-1 h-12 sm:h-16 mb-3">
+                    {Array.from({ length: 30 }).map((_, i) => (
                       <div 
-                        class="waveform-bar bg-primary/30 w-1 rounded-full transition-all duration-200"
+                        class="waveform-bar bg-primary/30 w-0.5 sm:w-1 rounded-full transition-all duration-200"
                         style={`height: ${Math.random() * 60 + 20}%`}
                       ></div>
                     ))}
@@ -170,15 +205,15 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
                   </div>
 
                   <!-- Controls -->
-                  <div class="flex items-center justify-center gap-3">
+                  <div class="flex items-center justify-center gap-2 sm:gap-3">
                     <!-- Rewind 10s -->
                     <button
                       type="button"
                       id="rewind-btn"
-                      class="p-2 text-text-body/60 hover:text-primary transition-colors"
+                      class="p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors"
                       title="Rewind 10 seconds"
                     >
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"/>
                       </svg>
                     </button>
@@ -187,12 +222,12 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
                     <button
                       type="button"
                       id="play-pause-btn"
-                      class="w-12 h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg transition-all duration-200 hover:bg-primary-hover hover:shadow-xl hover:scale-105 active:scale-95"
+                      class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg transition-all duration-200 hover:bg-primary-hover hover:shadow-xl hover:scale-105 active:scale-95"
                     >
-                      <svg id="play-icon" class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                      <svg id="play-icon" class="w-5 h-5 sm:w-6 sm:h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z"/>
                       </svg>
-                      <svg id="pause-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24">
+                      <svg id="pause-icon" class="w-5 h-5 sm:w-6 sm:h-6 hidden" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
                       </svg>
                     </button>
@@ -201,39 +236,37 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
                     <button
                       type="button"
                       id="forward-btn"
-                      class="p-2 text-text-body/60 hover:text-primary transition-colors"
+                      class="p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors"
                       title="Forward 10 seconds"
                     >
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"/>
                       </svg>
                     </button>
 
                     <!-- Volume -->
-                    <div class="flex items-center gap-2">
-                      <button
-                        type="button"
-                        id="volume-btn"
-                        class="p-2 text-text-body/60 hover:text-primary transition-colors"
-                      >
-                        <svg id="volume-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
-                        </svg>
-                        <svg id="mute-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
-                        </svg>
-                      </button>
-                    </div>
+                    <button
+                      type="button"
+                      id="volume-btn"
+                      class="p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors"
+                    >
+                      <svg id="volume-icon" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                      </svg>
+                      <svg id="mute-icon" class="w-4 h-4 sm:w-5 sm:h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+                      </svg>
+                    </button>
                   </div>
 
                   <!-- Download button -->
                   <a
                     href={transcription.audio.url}
                     download
-                    class="mt-4 w-full flex items-center justify-center gap-2 bg-white border border-primary/30 text-primary px-4 py-2.5 rounded-lg text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary"
+                    class="mt-3 sm:mt-4 w-full flex items-center justify-center gap-2 bg-white border border-primary/30 text-primary px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary active:scale-95"
                   >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                     </svg>
                     Download Audio
@@ -246,12 +279,12 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
             )}
 
             <!-- Share Button -->
-            <div class="mt-6 pt-6 border-t border-text-body/10">
+            <div class="p-4 border-t border-text-body/10">
               <button
                 type="button"
-                class="w-full flex items-center justify-center gap-2 bg-white border border-text-body/20 text-text-body px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:border-primary hover:text-primary"
+                class="w-full flex items-center justify-center gap-2 bg-white border border-text-body/20 text-text-body px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 hover:border-primary hover:text-primary active:scale-95"
               >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
                 </svg>
                 Share
@@ -261,39 +294,39 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
         </aside>
 
         <!-- ============ PAGE CONTENT ============ -->
-        <main>
-          <div class="space-y-6">
+        <main class="order-1 lg:order-2">
+          <div class="space-y-4 sm:space-y-6">
             {pages.map((page) => (
               <div
                 id={`page-${page.pageNum}`}
-                class="page-content bg-white rounded-xl border border-text-body/10 shadow-sm p-6 sm:p-8 scroll-mt-6"
+                class="page-content bg-white rounded-xl border border-text-body/10 shadow-sm p-4 sm:p-6 lg:p-8 scroll-mt-6"
               >
                 <!-- Page number badge -->
-                <div class="flex items-center justify-between mb-6 pb-4 border-b border-text-body/10">
-                  <span class="inline-flex items-center gap-2 text-xs font-bold text-primary bg-primary/10 px-3 py-1.5 rounded-full">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <div class="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-text-body/10">
+                  <span class="inline-flex items-center gap-1.5 sm:gap-2 text-xs font-bold text-primary bg-primary/10 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full">
+                    <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
                     </svg>
                     Page {page.pageNum}
                   </span>
                   
                   <!-- Page actions -->
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-center gap-1 sm:gap-2">
                     <button
                       type="button"
-                      class="p-1.5 text-text-body/40 hover:text-primary transition-colors"
+                      class="p-1.5 text-text-body/40 hover:text-primary active:text-primary transition-colors"
                       title="Copy text"
                     >
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                       </svg>
                     </button>
                     <button
                       type="button"
-                      class="p-1.5 text-text-body/40 hover:text-primary transition-colors"
+                      class="p-1.5 text-text-body/40 hover:text-primary active:text-primary transition-colors"
                       title="Text size"
                     >
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7"/>
                       </svg>
                     </button>
@@ -301,9 +334,9 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
                 </div>
 
                 <!-- Content -->
-                <div class="prose prose-lg max-w-none">
+                <div class="prose prose-sm sm:prose-base lg:prose-lg max-w-none">
                   {page.content.split('\n\n').map(paragraph => (
-                    <p class="text-text-body leading-relaxed mb-4 last:mb-0">
+                    <p class="text-text-body text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 last:mb-0">
                       {paragraph}
                     </p>
                   ))}
@@ -313,23 +346,23 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
           </div>
 
           <!-- ============ PAGINATION ============ -->
-          <div class="mt-10 flex items-center justify-between gap-4">
+          <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
             <a
               href="#"
-              class="inline-flex items-center gap-2 bg-white border border-text-body/20 text-text-body px-5 py-2.5 rounded-full text-sm font-semibold shadow-sm transition-all duration-200 hover:border-primary hover:text-primary hover:shadow-md"
+              class="flex items-center justify-center gap-2 bg-white border border-text-body/20 text-text-body px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 hover:border-primary hover:text-primary hover:shadow-md active:scale-95"
             >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
               </svg>
-              Previous Lecture
+              <span class="truncate">Previous Lecture</span>
             </a>
 
             <a
               href="#"
-              class="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary-hover hover:shadow-lg"
+              class="flex items-center justify-center gap-2 bg-primary text-white px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary-hover hover:shadow-lg active:scale-95"
             >
-              Next Lecture
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <span class="truncate">Next Lecture</span>
+              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
               </svg>
             </a>
@@ -343,6 +376,23 @@ So this is the substance of Bhagavad-gītā. And we request everyone to read Bha
 </Layout>
 
 <script>
+// ============ MOBILE NAV TOGGLE ============
+const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+const mobileNavContent = document.getElementById('mobile-nav-content');
+const navChevron = document.getElementById('nav-chevron');
+
+mobileNavToggle?.addEventListener('click', () => {
+  const isHidden = mobileNavContent.classList.contains('hidden');
+  
+  if (isHidden) {
+    mobileNavContent.classList.remove('hidden');
+    navChevron.style.transform = 'rotate(180deg)';
+  } else {
+    mobileNavContent.classList.add('hidden');
+    navChevron.style.transform = 'rotate(0deg)';
+  }
+});
+
 // ============ PAGE NAVIGATION ============
 const pageLinks = document.querySelectorAll('.page-link');
 const pageContents = document.querySelectorAll('.page-content');
@@ -374,6 +424,13 @@ pageLinks.forEach(link => {
     e.preventDefault();
     const targetId = link.getAttribute('href');
     const target = document.querySelector(targetId);
+    
+    // Close mobile nav if open
+    if (window.innerWidth < 1024) {
+      mobileNavContent?.classList.add('hidden');
+      if (navChevron) navChevron.style.transform = 'rotate(0deg)';
+    }
+    
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -494,14 +551,15 @@ audio?.addEventListener('pause', () => {
   @media (max-width: 640px) {
     .prose p {
       text-align: left;
+      hyphens: none;
     }
   }
 
   /* Custom audio slider styles */
   .audio-slider::-webkit-slider-thumb {
     appearance: none;
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: #f97316;
     cursor: pointer;
@@ -509,14 +567,25 @@ audio?.addEventListener('pause', () => {
     transition: all 0.2s;
   }
 
+  @media (min-width: 640px) {
+    .audio-slider::-webkit-slider-thumb {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
   .audio-slider::-webkit-slider-thumb:hover {
     transform: scale(1.2);
     box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
   }
 
+  .audio-slider::-webkit-slider-thumb:active {
+    transform: scale(1.1);
+  }
+
   .audio-slider::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: #f97316;
     cursor: pointer;
@@ -525,9 +594,20 @@ audio?.addEventListener('pause', () => {
     transition: all 0.2s;
   }
 
+  @media (min-width: 640px) {
+    .audio-slider::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
   .audio-slider::-moz-range-thumb:hover {
     transform: scale(1.2);
     box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+  }
+
+  .audio-slider::-moz-range-thumb:active {
+    transform: scale(1.1);
   }
 
   /* Progress bar fill */
@@ -538,5 +618,10 @@ audio?.addEventListener('pause', () => {
   /* Waveform bars animation */
   .waveform-bar {
     transition: height 0.2s ease, background-color 0.2s ease;
+  }
+
+  /* Smooth scrolling offset for sticky nav */
+  html {
+    scroll-padding-top: 6rem;
   }
 </style>
