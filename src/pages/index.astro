@@ -4,320 +4,750 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout page="default">
   <!-- ================= HERO SECTION ================= -->
-  <section class="w-full bg-section-bg">
+  <section
+    class="w-full bg-gradient-to-br from-section-bg via-white to-primary/5 py-16 md:py-24 relative overflow-hidden"
+  >
+    <!-- Background Decorative Elements -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
     <div
-      class="max-w-7xl mx-auto px-4 sm:px-5 lg:px-6 py-6 sm:py-8 lg:py-10 xl:py-12 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-start"
+      class="absolute top-10 right-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl"
     >
-      <!-- Left Image -->
-      <div class="order-1 lg:order-1">
-        <img
-          src="../assets/images/hero.png"
-          alt="Bhakti Prema Swami"
-          class="w-full h-auto rounded-sm shadow-md"
-        />
-      </div>
+    </div>
+    <div
+      class="absolute bottom-10 left-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+    >
+    </div>
 
-      <!-- Right Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <div
-        class="flex flex-col items-center text-center lg:mt-16 order-2 lg:order-2"
+        class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
       >
-        <h2
-          class="text-3xl sm:text-4xl md:text-5xl font-pacifico text-primary mb-3 sm:mb-4"
-        >
-          Bhakti Prema Swami
-        </h2>
+        <!-- Left Image -->
+        <div class="order-2 lg:order-1">
+          <div class="relative group">
+            <!-- Glow Effect -->
+            <div
+              class="absolute -inset-4 bg-gradient-to-r from-primary to-primary-hover rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"
+            >
+            </div>
 
-        <p
-          class="text-text-body text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mb-4 sm:mb-5 lg:mb-6"
-        >
-          Bhakti Prema Swami is a Gaudiya Vaishnava sannyasi in the
-          International Society for Krishna Consciousness. He is a disciple of
-          His Holiness Bhakti Charu Swami, who is a disciple of His Divine Grace
-          A.C. Bhaktivedanta Swami Prabhupada, the Founder-Acharya of ISKCON.
-        </p>
+            <!-- Image Container -->
+            <div
+              class="relative rounded-2xl overflow-hidden shadow-2xl transform transition duration-500 group-hover:-translate-y-2"
+            >
+              <img
+                src="../assets/images/hero.png"
+                alt="Bhakti Prema Swami"
+                class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <!-- Gradient Overlay -->
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"
+              >
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div class="mt-2 sm:mt-3 lg:mt-4">
-          <a
-            href="/bhakti-prema-swami"
-            class="inline-block bg-primary hover:bg-primary-hover text-white px-6 sm:px-7 lg:px-8 py-2.5 sm:py-3 rounded-full text-sm sm:text-base md:text-lg transition"
-          >
-            Read More
-          </a>
+        <!-- Right Content -->
+        <div class="order-1 lg:order-2">
+          <div class="max-w-2xl">
+            <!-- Badge -->
+            <div
+              class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                ></path>
+              </svg>
+              <span class="text-sm font-semibold">Spiritual Leader</span>
+            </div>
+
+            <!-- Title -->
+            <h1
+              class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
+            >
+              His Holiness
+              <span class="text-primary block mt-2 font-pacifico"
+                >Bhakti Prema Swami</span
+              >
+            </h1>
+
+            <!-- Description -->
+            <p class="text-lg text-gray-600 leading-relaxed mb-8">
+              Bhakti Prema Swami is a Gaudiya Vaishnava sannyasi in the
+              International Society for Krishna Consciousness. He is a disciple
+              of His Holiness Bhakti Charu Swami, who is a disciple of His
+              Divine Grace A.C. Bhaktivedanta Swami Prabhupada, the
+              Founder-Acharya of ISKCON.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href="/bhakti-prema-swami"
+                class="inline-flex items-center justify-center bg-gradient-to-r from-primary to-primary-hover text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group"
+              >
+                Read More
+                <svg
+                  class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
+              <a
+                href="#daily-classes"
+                class="inline-flex items-center justify-center border-2 border-primary text-primary px-8 py-4 rounded-xl font-semibold hover:bg-primary/5 transition-all duration-300"
+              >
+                Join Classes
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Section Border Divider -->
-  <div class="h-2 sm:h-3 lg:h-4 bg-primary-hover"></div>
+  <div class="h-1 bg-gradient-to-r from-primary/0 via-primary to-primary/0">
+  </div>
 
   <!-- ================= ABOUT SRILA PRABHUPADA ================= -->
-  <section class="bg-white py-12 sm:py-16 lg:py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+  <section class="bg-white py-16 md:py-24 relative">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 bg-dots-pattern opacity-[0.02]"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <!-- Heading -->
-      <div class="text-center mb-10 lg:mb-12">
+      <div class="text-center max-w-3xl mx-auto mb-16">
         <h2
-          class="text-2xl sm:text-3xl lg:text-4xl text-primary-hover font-bold"
+          class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
         >
           About Srila Prabhupada
         </h2>
-
-        <!-- Correct Border -->
-        <span
-          class="block mx-auto mt-4 w-16 sm:w-20 md:w-24 lg:w-32 h-1 bg-primary rounded"
-        ></span>
+        <!-- Underline -->
+        <div class="flex justify-center">
+          <div
+            class="w-24 h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full"
+          >
+          </div>
+        </div>
+        <p class="text-lg text-gray-600 mt-6">
+          The visionary who brought Krishna consciousness to the world
+        </p>
       </div>
 
       <!-- Content -->
       <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center"
+        class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
       >
         <!-- Left Image -->
         <div class="flex justify-center">
-          <img
-            src="../assets/images/About-Srila-Prabhupada.png"
-            alt="Srila Prabhupada"
-            class="max-w-full h-auto object-contain"
-          />
+          <div class="relative group">
+            <div
+              class="absolute -inset-4 bg-gradient-to-br from-primary/20 to-primary-hover/20 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500"
+            >
+            </div>
+            <img
+              src="../assets/images/About-Srila-Prabhupada.png"
+              alt="Srila Prabhupada"
+              class="relative rounded-2xl shadow-2xl max-w-full h-auto object-contain transform transition duration-500 group-hover:scale-[1.02]"
+            />
+          </div>
         </div>
 
         <!-- Right Text -->
-        <div
-          class="text-primary-hover text-base sm:text-lg leading-relaxed font-medium"
-        >
-          <p>
+        <div class="space-y-6">
+          <p class="text-lg text-gray-700 leading-relaxed">
             Srila Prabhupada, born Abhay Charan Bhaktivedanta Swami in 1896, was
             a spiritual leader and the founder of the International Society for
             Krishna Consciousness (ISKCON). He dedicated his life to spreading
             the teachings of Lord Krishna worldwide, writing over 147 books and
-            establishing temples across six continents. At the age of 69, he
-            arrived in New York City with little money but immense
-            determination. Through his teachings, books, and guidance, he
-            inspired thousands and established ISKCON as a global spiritual
+            establishing temples across six continents.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            At the age of 69, he arrived in New York City with little money but
+            immense determination. Through his teachings, books, and guidance,
+            he inspired thousands and established ISKCON as a global spiritual
             movement.
           </p>
-        </div>
-      </div>
 
-      <!-- See More Button -->
-      <div class="mt-12 flex justify-center">
-        <a
-          href="/srila-prabhupada"
-          class="inline-block bg-primary hover:bg-primary-hover text-white px-8 py-3 rounded-full text-base sm:text-lg md:text-xl transition"
-        >
-          See More
-        </a>
+          <!-- See More Button -->
+          <div class="pt-4">
+            <a
+              href="/srila-prabhupada"
+              class="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-hover text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group"
+            >
+              See More
+              <svg
+                class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Section Border Divider -->
-  <div class="h-2 sm:h-3 lg:h-4 bg-primary-hover"></div>
+  <div
+    class="h-1 bg-gradient-to-r from-primary-hover/0 via-primary-hover to-primary-hover/0"
+  >
+  </div>
 
   <!-- ================= ABOUT BHAKTI CHARU SWAMI ================= -->
-  <section class="bg-section-bg py-12 sm:py-16 lg:py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <!-- Subtitle -->
-      <p
-        class="text-center text-primary text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2"
-      >
-        Srila Prabhupada Man
-      </p>
+  <section
+    class="bg-gradient-to-b from-section-bg to-white py-16 md:py-24 relative overflow-hidden"
+  >
+    <!-- Background Elements -->
+    <div
+      class="absolute top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
+    >
+    </div>
 
-      <!-- Main Title -->
-      <h1
-        class="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-center text-primary mb-3"
-      >
-        H.H. Bhakti Charu Swami Maharaja
-      </h1>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <!-- Subtitle -->
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+            ></path>
+          </svg>
+          <span class="text-sm font-semibold">Srila Prabhupada Man</span>
+        </div>
 
-      <!-- Underline -->
-      <span
-        class="block mx-auto w-16 sm:w-20 md:w-24 lg:w-32 h-1 bg-primary rounded mb-8 sm:mb-10 lg:mb-12 xl:mb-16"
-      ></span>
+        <!-- Main Title -->
+        <h1
+          class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+        >
+          H.H. Bhakti Charu Swami Maharaja
+        </h1>
+
+        <!-- Underline -->
+        <div class="flex justify-center">
+          <div
+            class="w-24 h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full"
+          >
+          </div>
+        </div>
+      </div>
 
       <!-- Content -->
       <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center"
+        class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
       >
         <!-- Left Text -->
-        <div
-          class="text-primary-hover text-base sm:text-lg leading-relaxed font-medium"
-        >
-          <p>
+        <div class="space-y-6">
+          <p class="text-lg text-gray-700 leading-relaxed">
             HH Bhakti Charu Swami Maharaja was born into an aristocratic Bengali
             family on 17th September 1945 in Kuti, Brahmanbaria District, Bengal
             Presidency (now Bangladesh). He spent most of his childhood in urban
-            Kolkata. Leaving India in 1970 in pursuit of further education, he
-            attended university in Germany to study Chemistry. However, after
-            some time he felt rather dissatisfied with Western culture and so he
-            returned to India in search of a spiritual teacher.
+            Kolkata.
           </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Leaving India in 1970 in pursuit of further education, he attended
+            university in Germany to study Chemistry. However, after some time
+            he felt rather dissatisfied with Western culture and so he returned
+            to India in search of a spiritual teacher.
+          </p>
+
+          <!-- See More Button -->
+          <div class="pt-4">
+            <a
+              href="/bhakti-charu-swami"
+              class="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-hover text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group"
+            >
+              See More
+              <svg
+                class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
         </div>
 
         <!-- Right Image -->
-        <div class="flex justify-center">
-          <img
-            src="../assets/images/hh-bhakti-charu-swami-maharaj.jpg"
-            alt="H.H. Bhakti Charu Swami Maharaja"
-            class="max-w-full h-auto object-contain rounded-lg"
-          />
+        <div class="flex justify-center lg:justify-end">
+          <div class="relative group">
+            <div
+              class="absolute -inset-4 bg-gradient-to-tl from-primary/20 to-primary-hover/20 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500"
+            >
+            </div>
+            <img
+              src="../assets/images/hh-bhakti-charu-swami-maharaj.jpg"
+              alt="H.H. Bhakti Charu Swami Maharaja"
+              class="relative rounded-2xl shadow-2xl max-w-full h-auto object-cover transform transition duration-500 group-hover:scale-[1.02]"
+            />
+          </div>
         </div>
-      </div>
-
-      <!-- See More Button -->
-      <div class="mt-12 flex justify-center">
-        <a
-          href="/bhakti-charu-swami"
-          class="inline-block bg-primary hover:bg-primary-hover text-white px-8 py-3 rounded-full text-base sm:text-lg md:text-xl transition"
-        >
-          See More
-        </a>
       </div>
     </div>
   </section>
 
   <!-- Section Border Divider -->
-  <div class="h-2 sm:h-3 lg:h-4 bg-primary-hover"></div>
+  <div
+    class="h-1 bg-gradient-to-r from-primary-hover/0 via-primary-hover to-primary-hover/0"
+  >
+  </div>
 
-  <!-- ================= MEDIA SECTION ================= -->
-  <section class="bg-white py-12 sm:py-14 lg:py-16">
-    <!-- ================= VIDEO LECTURE SECTION ================= -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-5 lg:px-6">
-      <!-- ================= SECTION HEADING ================= -->
-      <div class="text-center mb-12">
-        <h2
-          class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary mb-3"
+  <!-- ================= DAILY CLASSES SECTION ================= -->
+  <section id="daily-classes" class="bg-white py-16 md:py-24 relative">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-[0.02]"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <!-- Section Heading -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4"
         >
-          VIDEO LECTURE
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span class="text-sm font-semibold">Live Sessions</span>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+        >
+          Daily Classes
         </h2>
 
         <!-- Underline -->
-        <span class="block mx-auto w-24 h-1 bg-primary rounded mb-6"></span>
+        <div class="flex justify-center">
+          <div
+            class="w-24 h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full mb-6"
+          >
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-600">
+          Join our daily spiritual classes and deepen your understanding of
+          Vedic wisdom
+        </p>
+      </div>
+
+      <!-- Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- Bangla Class -->
+        <div
+          class="group relative bg-gradient-to-br from-primary via-primary to-primary-hover text-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden"
+        >
+          <!-- Background Pattern -->
+          <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
+
+          <div class="relative">
+            <!-- Icon -->
+            <div class="mb-8">
+              <div
+                class="inline-flex items-center justify-center p-4 bg-white/20 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300"
+              >
+                <svg
+                  class="w-10 h-10 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-3xl font-bold mb-3">Bangla Class</h3>
+              <div class="w-20 h-1 bg-white/50 rounded-full"></div>
+            </div>
+
+            <!-- Time -->
+            <div class="mb-8">
+              <p class="text-2xl font-bold">9:30 AM – 10:00 AM</p>
+              <p class="text-white/80 mt-2">Daily Morning Session</p>
+            </div>
+
+            <!-- Meeting Details -->
+            <div
+              class="bg-white/10 rounded-2xl p-6 mb-8 backdrop-blur-sm border border-white/20"
+            >
+              <div class="grid grid-cols-2 gap-6">
+                <div>
+                  <p class="text-sm text-white/80 mb-2">Meeting ID</p>
+                  <p class="text-2xl font-bold tracking-wider">6790009886</p>
+                </div>
+                <div>
+                  <p class="text-sm text-white/80 mb-2">Passcode</p>
+                  <p class="text-2xl font-bold tracking-wider">123456</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Join Button -->
+            <a
+              href="#"
+              class="inline-flex items-center justify-center w-full border-2 border-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-primary transition-all duration-300 shadow-lg hover:shadow-xl group/btn"
+            >
+              Join Class
+              <svg
+                class="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hindi Class -->
+        <div
+          class="group relative bg-white text-gray-900 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-primary/10"
+        >
+          <!-- Background Pattern -->
+          <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+
+          <div class="relative">
+            <!-- Icon -->
+            <div class="mb-8">
+              <div
+                class="inline-flex items-center justify-center p-4 bg-primary/10 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300"
+              >
+                <svg
+                  class="w-10 h-10 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-3xl font-bold mb-3 text-primary">Hindi Class</h3>
+              <div class="w-20 h-1 bg-primary/50 rounded-full"></div>
+            </div>
+
+            <!-- Time -->
+            <div class="mb-8">
+              <p class="text-2xl font-bold text-primary">2:30 PM – 3:00 PM</p>
+              <p class="text-gray-600 mt-2">Daily Afternoon Session</p>
+            </div>
+
+            <!-- Meeting Details -->
+            <div
+              class="bg-primary/5 rounded-2xl p-6 mb-8 border border-primary/10"
+            >
+              <div class="grid grid-cols-2 gap-6">
+                <div>
+                  <p class="text-sm text-gray-600 mb-2">Meeting ID</p>
+                  <p class="text-2xl font-bold text-primary tracking-wider">
+                    6790009886
+                  </p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-600 mb-2">Passcode</p>
+                  <p class="text-2xl font-bold text-primary tracking-wider">
+                    123456
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Join Button -->
+            <a
+              href="#"
+              class="inline-flex items-center justify-center w-full border-2 border-primary px-8 py-4 rounded-xl font-bold text-lg text-primary hover:bg-primary hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl group/btn"
+            >
+              Join Class
+              <svg
+                class="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Border Divider -->
+  <div
+    class="h-1 bg-gradient-to-r from-primary-hover/0 via-primary-hover to-primary-hover/0"
+  >
+  </div>
+
+  <!-- ================= MEDIA SECTION ================= -->
+  <section
+    class="bg-gradient-to-b from-section-bg to-white py-16 md:py-24 relative"
+  >
+    <!-- ================= VIDEO LECTURE SECTION ================= -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <!-- ================= SECTION HEADING ================= -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            ></path>
+          </svg>
+          <span class="text-sm font-semibold">Video Lectures</span>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+        >
+          Video Lectures
+        </h2>
+
+        <!-- Underline -->
+        <div class="flex justify-center">
+          <div
+            class="w-24 h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full"
+          >
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-600 mt-6">
+          Watch and learn from our collection of spiritual discourses
+        </p>
       </div>
 
       <!-- ================= VIDEO GRID ================= -->
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10"
-      >
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- ================= VIDEO CARD 1 ================= -->
         <div
-          class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
         >
           <a
             href="https://www.youtube.com/watch?v=ZE61nnEMjv4"
             target="_blank"
             rel="noopener noreferrer"
-            class="block relative"
+            class="block relative overflow-hidden"
           >
-            <img
-              src="https://img.youtube.com/vi/ZE61nnEMjv4/hqdefault.jpg"
-              alt="Bhagavad Gita Discourse"
-              class="w-full h-52 sm:h-56 md:h-60 object-cover"
-            />
-            <div
-              class="absolute inset-0 bg-black/30 flex items-center justify-center"
-            >
+            <!-- Thumbnail Container -->
+            <div class="aspect-video relative overflow-hidden">
+              <img
+                src="https://img.youtube.com/vi/ZE61nnEMjv4/hqdefault.jpg"
+                alt="Bhagavad Gita Discourse"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <!-- Gradient Overlay -->
               <div
-                class="w-14 h-14 bg-primary rounded-full flex items-center justify-center hover:bg-primary-hover transition-colors"
+                class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
               >
-                <svg
-                  class="w-7 h-7 text-white ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
+              </div>
+              <!-- Play Button -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div
+                  class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
                 >
-                  <path d="M8 5v14l11-7z"></path>
-                </svg>
+                  <svg
+                    class="w-8 h-8 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z"></path>
+                  </svg>
+                </div>
               </div>
             </div>
           </a>
-          <div class="p-5">
-            <h3 class="font-semibold text-lg text-text-body mb-2">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
               Bhagavad Gita Discourse
             </h3>
-            <p class="text-sm text-text-body/80">
+            <p class="text-gray-600 mb-4">
               Introduction to the sacred teachings
             </p>
+            <a
+              href="https://www.youtube.com/watch?v=ZE61nnEMjv4"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center text-primary font-semibold group/link"
+            >
+              Watch Now
+              <svg
+                class="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+              </svg>
+            </a>
           </div>
         </div>
 
         <!-- ================= VIDEO CARD 2 ================= -->
         <div
-          class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
         >
           <a
             href="https://www.youtube.com/watch?v=hWhe4Xz7u_o"
             target="_blank"
             rel="noopener noreferrer"
-            class="block relative"
+            class="block relative overflow-hidden"
           >
-            <img
-              src="https://img.youtube.com/vi/hWhe4Xz7u_o/hqdefault.jpg"
-              alt="Krishna Consciousness"
-              class="w-full h-52 sm:h-56 md:h-60 object-cover"
-            />
-            <div
-              class="absolute inset-0 bg-black/30 flex items-center justify-center"
-            >
+            <!-- Thumbnail Container -->
+            <div class="aspect-video relative overflow-hidden">
+              <img
+                src="https://img.youtube.com/vi/hWhe4Xz7u_o/hqdefault.jpg"
+                alt="Krishna Consciousness"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <!-- Gradient Overlay -->
               <div
-                class="w-14 h-14 bg-primary rounded-full flex items-center justify-center hover:bg-primary-hover transition-colors"
+                class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
               >
-                <svg
-                  class="w-7 h-7 text-white ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
+              </div>
+              <!-- Play Button -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div
+                  class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
                 >
-                  <path d="M8 5v14l11-7z"></path>
-                </svg>
+                  <svg
+                    class="w-8 h-8 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z"></path>
+                  </svg>
+                </div>
               </div>
             </div>
           </a>
-          <div class="p-5">
-            <h3 class="font-semibold text-lg text-text-body mb-2">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
               Krishna Consciousness
             </h3>
-            <p class="text-sm text-text-body/80">Path to spiritual awakening</p>
+            <p class="text-gray-600 mb-4">Path to spiritual awakening</p>
+            <a
+              href="https://www.youtube.com/watch?v=hWhe4Xz7u_o"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center text-primary font-semibold group/link"
+            >
+              Watch Now
+              <svg
+                class="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+              </svg>
+            </a>
           </div>
         </div>
 
         <!-- ================= VIDEO CARD 3 ================= -->
         <div
-          class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
         >
           <a
             href="https://www.youtube.com/watch?v=XE21iSkxw-I"
             target="_blank"
             rel="noopener noreferrer"
-            class="block relative"
+            class="block relative overflow-hidden"
           >
-            <img
-              src="https://img.youtube.com/vi/XE21iSkxw-I/hqdefault.jpg"
-              alt="Devotional Practice"
-              class="w-full h-52 sm:h-56 md:h-60 object-cover"
-            />
-            <div
-              class="absolute inset-0 bg-black/30 flex items-center justify-center"
-            >
+            <!-- Thumbnail Container -->
+            <div class="aspect-video relative overflow-hidden">
+              <img
+                src="https://img.youtube.com/vi/XE21iSkxw-I/hqdefault.jpg"
+                alt="Devotional Practice"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <!-- Gradient Overlay -->
               <div
-                class="w-14 h-14 bg-primary rounded-full flex items-center justify-center hover:bg-primary-hover transition-colors"
+                class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
               >
-                <svg
-                  class="w-7 h-7 text-white ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
+              </div>
+              <!-- Play Button -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div
+                  class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
                 >
-                  <path d="M8 5v14l11-7z"></path>
-                </svg>
+                  <svg
+                    class="w-8 h-8 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z"></path>
+                  </svg>
+                </div>
               </div>
             </div>
           </a>
-          <div class="p-5">
-            <h3 class="font-semibold text-lg text-text-body mb-2">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
               Devotional Practice
             </h3>
-            <p class="text-sm text-text-body/80">
+            <p class="text-gray-600 mb-4">
               Daily spiritual practices explained
             </p>
+            <a
+              href="https://www.youtube.com/watch?v=XE21iSkxw-I"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center text-primary font-semibold group/link"
+            >
+              Watch Now
+              <svg
+                class="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+              </svg>
+            </a>
           </div>
         </div>
       </div>
@@ -328,577 +758,1369 @@ import Layout from "../layouts/Layout.astro";
           href="https://www.youtube.com/@HHBhaktiPremaSwami"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-block bg-primary text-white px-8 sm:px-10 lg:px-12 py-3 sm:py-3.5 lg:py-4 rounded-full text-sm sm:text-base lg:text-lg font-semibold hover:bg-primary-hover transition-colors shadow-lg hover:shadow-xl"
+          class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-hover text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group"
         >
-          See More
+          See More Videos
+          <svg
+            class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
         </a>
       </div>
     </div>
-    <!-- ================= END VIDEO LECTURE SECTION ================= -->
   </section>
 
   <!-- Section Border Divider -->
-  <div class="h-2 sm:h-3 lg:h-4 bg-primary-hover"></div>
+  <div
+    class="h-1 bg-gradient-to-r from-primary-hover/0 via-primary-hover to-primary-hover/0"
+  >
+  </div>
+
+  <!-- ================= VENTURES SECTION ================= -->
+  <section
+    class="bg-gradient-to-b from-section-bg to-white py-16 md:py-24 relative"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- ================= SECTION HEADING ================= -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4"
+        >
+          <span class="text-sm font-semibold">Ventures</span>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+        >
+          Our Ventures
+        </h2>
+
+        <div class="flex justify-center">
+          <div
+            class="w-24 h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full"
+          >
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-600 mt-6">
+          Following Srila Prabhupada’s vision, HH Bhakti Charu Swami established
+          various spiritual, cultural, and humanitarian initiatives.
+        </p>
+      </div>
+
+      <!-- ================= VENTURES GRID ================= -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- ================= VENTURE 1 ================= -->
+        <div
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+        >
+          <div class="aspect-[4/3] overflow-hidden">
+            <img
+              src="/assets/img/ventures/abhay-charan.jpg"
+              alt="Abhay Charan"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </div>
+
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Abhay Charan</h3>
+            <p class="text-gray-600">
+              An epic television serial portraying the divine life and teachings
+              of His Divine Grace A.C. Bhaktivedanta Swami Prabhupada.
+            </p>
+          </div>
+        </div>
+
+        <!-- ================= VENTURE 2 ================= -->
+        <div
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+        >
+          <div class="aspect-[4/3] overflow-hidden">
+            <img
+              src="/assets/img/ventures/iskcon-ujjain.jpg"
+              alt="ISKCON Ujjain Temple"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </div>
+
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              Temples & Farms
+            </h3>
+            <p class="text-gray-600">
+              Temples and farm communities established worldwide, including
+              Ujjain, Panihati, Kuti, and DeLand, promoting devotional living.
+            </p>
+          </div>
+        </div>
+
+        <!-- ================= VENTURE 3 ================= -->
+        <div
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+        >
+          <div class="aspect-[4/3] overflow-hidden">
+            <img
+              src="/assets/img/ventures/ayurvedic-centre.jpg"
+              alt="Ayurvedic Centre"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </div>
+
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              Ayurvedic Centre
+            </h3>
+            <p class="text-gray-600">
+              Arogya Niketan, a traditional Ayurvedic clinic in Ujjain, offering
+              holistic healing based on ancient Vedic science.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Border Divider -->
+  <div
+    class="h-1 bg-gradient-to-r from-primary-hover/0 via-primary-hover to-primary-hover/0"
+  >
+  </div>
+
+  <!-- ================= VILLAGE OUTREACH PROGRAMS ================= -->
+  <section
+    class="bg-gradient-to-b from-section-bg to-white py-16 md:py-24 relative"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- ================= SECTION HEADING ================= -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4"
+        >
+          <span class="text-sm font-semibold">Outreach</span>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+        >
+          Village Outreach Programs
+        </h2>
+
+        <div class="flex justify-center">
+          <div
+            class="w-24 h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full"
+          >
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-600 mt-6">
+          Spiritual outreach initiatives spreading the timeless wisdom of the
+          Bhagavad Gita and devotional culture across villages and cities.
+        </p>
+      </div>
+
+      <!-- ================= OUTREACH GRID ================= -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- ================= PROGRAM 1 ================= -->
+        <div
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+        >
+          <div class="aspect-[4/3] overflow-hidden">
+            <img
+              src="/assets/img/outreach/gita-mahotsav.jpg"
+              alt="Gita Mahotsav"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </div>
+
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Gita Mahotsav</h3>
+            <p class="text-gray-600">
+              A large-scale spiritual festival introducing the teachings of the
+              Bhagavad Gita, with participation from over <strong
+                >6 lakh+</strong
+              >
+              students across schools and colleges.
+            </p>
+          </div>
+        </div>
+
+        <!-- ================= PROGRAM 2 ================= -->
+        <div
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+        >
+          <div class="aspect-[4/3] overflow-hidden">
+            <img
+              src="/assets/img/outreach/rath-yatra.jpg"
+              alt="Rath Yatra"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </div>
+
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Rath Yatra</h3>
+            <p class="text-gray-600">
+              Grand Rath Yatra festivals organized in more than
+              <strong>35 cities and villages</strong>, bringing devotional joy
+              and cultural unity to communities.
+            </p>
+          </div>
+        </div>
+
+        <!-- ================= PROGRAM 3 ================= -->
+        <div
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+        >
+          <div class="aspect-[4/3] overflow-hidden">
+            <img
+              src="/assets/img/outreach/iskcon-ujjain-altars.jpg"
+              alt="ISKCON Ujjain Altars"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </div>
+
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              ISKCON Ujjain Altars
+            </h3>
+            <p class="text-gray-600">
+              Installation and worship of beautifully crafted altars in ISKCON
+              Ujjain, inspiring devotion and preserving traditional temple
+              culture.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Border Divider -->
+  <div
+    class="h-1 bg-gradient-to-r from-primary-hover/0 via-primary-hover to-primary-hover/0"
+  >
+  </div>
+
+  <!-- ================= LATEST ARTICLES ================= -->
+  <section
+    class="bg-gradient-to-b from-section-bg to-white py-16 md:py-24 relative"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- ================= SECTION HEADING ================= -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4"
+        >
+          <span class="text-sm font-semibold">Articles</span>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+        >
+          Latest Articles
+        </h2>
+
+        <div class="flex justify-center">
+          <div
+            class="w-24 h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full"
+          >
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-600 mt-6">
+          Insightful articles sharing spiritual wisdom, festivals, and teachings
+          from the Vaishnava tradition.
+        </p>
+      </div>
+
+      <!-- ================= ARTICLES GRID ================= -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- ================= ARTICLE 1 ================= -->
+        <div
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+        >
+          <div class="aspect-[4/3] overflow-hidden">
+            <img
+              src="/assets/img/articles/kartik-mas.jpg"
+              alt="Kartik Mas Deep Seva"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </div>
+
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              Kartik Mas Deep Seva
+            </h3>
+            <p class="text-gray-600">
+              Discover the significance of lighting lamps during the sacred
+              month of Kartik and the spiritual benefits it bestows.
+            </p>
+          </div>
+        </div>
+
+        <!-- ================= ARTICLE 2 ================= -->
+        <div
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+        >
+          <div class="aspect-[4/3] overflow-hidden">
+            <img
+              src="/assets/img/articles/nrisimha-chaturdashi.jpg"
+              alt="Nrisimha Chaturdashi"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </div>
+
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              Nrisimha Chaturdashi
+            </h3>
+            <p class="text-gray-600">
+              Celebrating the divine appearance of Lord Nrisimhadeva and His
+              powerful protection of devotees.
+            </p>
+          </div>
+        </div>
+
+        <!-- ================= ARTICLE 3 ================= -->
+        <div
+          class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+        >
+          <div class="aspect-[4/3] overflow-hidden">
+            <img
+              src="/assets/img/articles/gokulastha-pandit.jpg"
+              alt="Gokulastha Pandit"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </div>
+
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              Gokulastha Pandit
+            </h3>
+            <p class="text-gray-600">
+              Learn about the glorious life and teachings of Gokulastha Pandit,
+              a great associate of Lord Chaitanya Mahaprabhu.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Border Divider -->
+  <div
+    class="h-1 bg-gradient-to-r from-primary-hover/0 via-primary-hover to-primary-hover/0"
+  >
+  </div>
+
+  <!-- ================= INSPIRATIONAL QUOTES SECTION ================= -->
+  <section class="bg-white py-16 md:py-24 relative">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 bg-quote-pattern opacity-[0.02]"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <!-- Section Heading -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+            ></path>
+          </svg>
+          <span class="text-sm font-semibold">Words of Wisdom</span>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+        >
+          Timeless Spiritual Wisdom
+        </h2>
+
+        <!-- Underline -->
+        <div class="flex justify-center">
+          <div
+            class="w-24 h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full mb-6"
+          >
+          </div>
+        </div>
+
+        <p class="text-lg text-gray-600">
+          Profound insights from the great acharyas that guide us on the
+          spiritual path
+        </p>
+      </div>
+
+      <!-- Quotes Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Quote Card 1 - Srila Prabhupada -->
+        <div
+          class="group relative bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
+        >
+          <!-- Quote Icon -->
+          <div class="mb-6">
+            <svg
+              class="w-12 h-12 text-primary/30"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+              ></path>
+            </svg>
+          </div>
+
+          <!-- Quote Text -->
+          <p class="text-lg text-gray-700 leading-relaxed mb-8 italic">
+            "The highest perfection of human life is to remember Krishna at the
+            time of death."
+          </p>
+
+          <!-- Author -->
+          <div class="border-t border-gray-200 pt-6">
+            <p class="font-bold text-gray-900 text-lg">Srila Prabhupada</p>
+            <p class="text-gray-600 text-sm mt-1">Founder-Acharya of ISKCON</p>
+          </div>
+
+          <!-- Decorative Corner -->
+          <div
+            class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
+            <svg
+              class="w-8 h-8 text-primary/20"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Quote Card 2 - Bhakti Charu Swami -->
+        <div
+          class="group relative bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
+        >
+          <!-- Quote Icon -->
+          <div class="mb-6">
+            <svg
+              class="w-12 h-12 text-primary/30"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+              ></path>
+            </svg>
+          </div>
+
+          <!-- Quote Text -->
+          <p class="text-lg text-gray-700 leading-relaxed mb-8 italic">
+            "Devotional service is not just an activity, it is a state of
+            consciousness."
+          </p>
+
+          <!-- Author -->
+          <div class="border-t border-gray-200 pt-6">
+            <p class="font-bold text-gray-900 text-lg">
+              H.H. Bhakti Charu Swami
+            </p>
+            <p class="text-gray-600 text-sm mt-1">Spiritual Master</p>
+          </div>
+
+          <!-- Decorative Corner -->
+          <div
+            class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
+            <svg
+              class="w-8 h-8 text-primary/20"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Quote Card 3 - Bhagavad Gita -->
+        <div
+          class="group relative bg-gradient-to-br from-primary to-primary-hover rounded-2xl p-8 shadow-2xl hover:shadow-3xl transition-all duration-500"
+        >
+          <!-- Quote Icon -->
+          <div class="mb-6">
+            <svg
+              class="w-12 h-12 text-white/30"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+              ></path>
+            </svg>
+          </div>
+
+          <!-- Quote Text -->
+          <p class="text-lg text-white leading-relaxed mb-8 italic">
+            "Abandon all varieties of religion and just surrender unto Me. I
+            shall deliver you from all sinful reactions."
+          </p>
+
+          <!-- Author -->
+          <div class="border-t border-white/20 pt-6">
+            <p class="font-bold text-white text-lg">Bhagavad Gita</p>
+            <p class="text-white/80 text-sm mt-1">Chapter 18, Verse 66</p>
+          </div>
+
+          <!-- Decorative Corner -->
+          <div
+            class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
+            <svg
+              class="w-8 h-8 text-white/20"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Quote Banner -->
+      <div
+        class="mt-16 bg-gradient-to-r from-primary to-primary-hover rounded-2xl p-12 text-center shadow-2xl relative overflow-hidden"
+      >
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
+
+        <!-- Quote Icon -->
+        <div class="mb-8">
+          <svg
+            class="w-16 h-16 text-white/30 mx-auto"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+            ></path>
+          </svg>
+        </div>
+
+        <!-- Quote Text -->
+        <p
+          class="text-2xl text-white font-medium leading-relaxed mb-8 italic max-w-3xl mx-auto"
+        >
+          "Chanting the holy name of the Lord is the most sublime process to
+          revive our transcendental consciousness."
+        </p>
+
+        <!-- Author -->
+        <div
+          class="inline-flex items-center gap-3 bg-white/20 px-6 py-3 rounded-full backdrop-blur-sm"
+        >
+          <p class="text-white font-bold">Srila Prabhupada</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Border Divider -->
+  <div
+    class="h-1 bg-gradient-to-r from-primary-hover/0 via-primary-hover to-primary-hover/0"
+  >
+  </div>
 
   <!-- ================= BOOKS SECTION ================= -->
-  <section class="bg-section-bg min-h-screen">
-    <!-- ================= PAGE HEADER ================= -->
-    <div class="text-center py-12 sm:py-14 lg:py-16 px-4 sm:px-6">
-      <h1
-        class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-primary mb-4 sm:mb-5 lg:mb-6"
-      >
-        BOOKS
-      </h1>
-      <div class="flex justify-center">
-        <span
-          class="w-16 sm:w-20 md:w-24 lg:w-32 h-0.5 sm:h-1 bg-primary rounded"
-        ></span>
-      </div>
-      <p
-        class="text-sm sm:text-base md:text-lg lg:text-xl text-text-body mt-6 sm:mt-7 lg:mt-8 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed"
-      >
-        Discover the timeless spiritual literature authored and translated by
-        His Divine Grace A.C. Bhaktivedanta Swami Srila Prabhupada.
-      </p>
+  <section
+    class="bg-gradient-to-b from-section-bg to-white py-16 md:py-24 relative"
+  >
+    <!-- Background Elements -->
+    <div
+      class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent"
+    >
     </div>
 
-    <!-- ================= BOOKS GRID ================= -->
-    <div
-      class="max-w-7xl mx-auto px-4 sm:px-5 lg:px-6 py-6 sm:py-8 lg:py-10 xl:py-12"
-    >
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12"
-      >
+    <!-- ================= PAGE HEADER ================= -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="text-center mb-16">
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"
+            ></path>
+          </svg>
+          <span class="text-sm font-semibold">Sacred Literature</span>
+        </div>
+
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+        >
+          Sacred Books
+        </h1>
+
+        <!-- Underline -->
+        <div class="flex justify-center">
+          <div
+            class="w-32 h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full mb-8"
+          >
+          </div>
+        </div>
+
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Discover the timeless spiritual literature authored and translated by
+          His Divine Grace A.C. Bhaktivedanta Swami Srila Prabhupada.
+        </p>
+      </div>
+
+      <!-- ================= BOOKS GRID ================= -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Book Card 1 -->
         <div
-          class="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
         >
-          <img
-            src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
-            alt="Bhagavad Gita As It Is"
-            class="w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover"
-          />
-          <div class="p-5 sm:p-6 lg:p-8">
-            <h3
-              class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-primary mb-3 sm:mb-4"
+          <!-- Image Container -->
+          <div class="relative overflow-hidden h-64">
+            <img
+              src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
+              alt="Bhagavad Gita As It Is"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <!-- Overlay -->
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
             >
+            </div>
+            <!-- Category Badge -->
+            <div class="absolute top-4 left-4">
+              <span
+                class="inline-block bg-white/90 text-primary px-3 py-1 rounded-full text-sm font-semibold"
+              >
+                Essential Reading
+              </span>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">
               Bhagavad-gītā As It Is
             </h3>
-            <p
-              class="text-sm sm:text-base text-text-body leading-relaxed mb-4 sm:mb-5 lg:mb-6"
-            >
+            <p class="text-gray-600 leading-relaxed mb-6">
               The most authoritative and widely read edition of the
-              Bhagavad-gītā, presenting Lord Krishna’s teachings as they are.
+              Bhagavad-gītā, presenting Lord Krishna's teachings as they are.
             </p>
             <button
-              class="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors text-sm sm:text-base"
+              class="w-full bg-gradient-to-r from-primary to-primary-hover text-white py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group/btn"
             >
-              Read More
+              <span class="flex items-center justify-center gap-2">
+                Read More
+                <svg
+                  class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </span>
             </button>
           </div>
         </div>
 
         <!-- Book Card 2 -->
         <div
-          class="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
         >
-          <img
-            src="https://images.unsplash.com/photo-1512820790803-83ca734da794?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
-            alt="Srimad Bhagavatam"
-            class="w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover"
-          />
-          <div class="p-5 sm:p-6 lg:p-8">
-            <h3
-              class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-primary mb-3 sm:mb-4"
+          <!-- Image Container -->
+          <div class="relative overflow-hidden h-64">
+            <img
+              src="https://images.unsplash.com/photo-1512820790803-83ca734da794?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
+              alt="Srimad Bhagavatam"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <!-- Overlay -->
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
             >
+            </div>
+            <!-- Category Badge -->
+            <div class="absolute top-4 left-4">
+              <span
+                class="inline-block bg-white/90 text-primary px-3 py-1 rounded-full text-sm font-semibold"
+              >
+                18 Volumes
+              </span>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">
               Śrīmad Bhāgavatam
             </h3>
-            <p
-              class="text-sm sm:text-base text-text-body leading-relaxed mb-4 sm:mb-5 lg:mb-6"
-            >
+            <p class="text-gray-600 leading-relaxed mb-6">
               A multi-volume masterpiece describing pure devotional service and
               the pastimes of Lord Krishna.
             </p>
             <button
-              class="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors text-sm sm:text-base"
+              class="w-full bg-gradient-to-r from-primary to-primary-hover text-white py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group/btn"
             >
-              Read More
+              <span class="flex items-center justify-center gap-2">
+                Read More
+                <svg
+                  class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </span>
             </button>
           </div>
         </div>
 
         <!-- Book Card 3 -->
         <div
-          class="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
         >
-          <img
-            src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
-            alt="Chaitanya Charitamrita"
-            class="w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover"
-          />
-          <div class="p-5 sm:p-6 lg:p-8">
-            <h3
-              class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-primary mb-3 sm:mb-4"
+          <!-- Image Container -->
+          <div class="relative overflow-hidden h-64">
+            <img
+              src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
+              alt="Chaitanya Charitamrita"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <!-- Overlay -->
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
             >
+            </div>
+            <!-- Category Badge -->
+            <div class="absolute top-4 left-4">
+              <span
+                class="inline-block bg-white/90 text-primary px-3 py-1 rounded-full text-sm font-semibold"
+              >
+                Biography
+              </span>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">
               Caitanya-caritāmṛta
             </h3>
-            <p
-              class="text-sm sm:text-base text-text-body leading-relaxed mb-4 sm:mb-5 lg:mb-6"
-            >
+            <p class="text-gray-600 leading-relaxed mb-6">
               The definitive biography and teachings of Sri Chaitanya
               Mahaprabhu, written with deep philosophical clarity.
             </p>
             <button
-              class="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors text-sm sm:text-base"
+              class="w-full bg-gradient-to-r from-primary to-primary-hover text-white py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group/btn"
             >
-              Read More
+              <span class="flex items-center justify-center gap-2">
+                Read More
+                <svg
+                  class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </span>
             </button>
           </div>
         </div>
       </div>
 
       <!-- ================= SEE MORE BUTTON ================= -->
-      <div class="text-center mt-10">
+      <div class="text-center mt-16">
         <a
           href="/books"
-          class="inline-block bg-primary text-white px-8 sm:px-10 lg:px-12 py-3 sm:py-3.5 lg:py-4 rounded-full text-sm sm:text-base lg:text-lg font-semibold hover:bg-primary-hover transition-colors shadow-lg hover:shadow-xl"
+          class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-hover text-white px-10 py-5 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group"
         >
-          See More
+          Explore All Books
+          <svg
+            class="w-6 h-6 group-hover:translate-x-1 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
         </a>
       </div>
     </div>
   </section>
 
   <!-- Section Border Divider -->
-  <div class="h-2 sm:h-3 lg:h-4 bg-primary-hover"></div>
+  <div
+    class="h-1 bg-gradient-to-r from-primary-hover/0 via-primary-hover to-primary-hover/0"
+  >
+  </div>
 
-  <!-- ================= DAILY CLASSES SECTION ================= -->
-  <section class="bg-section-bg">
-    <div class="py-12 px-6 sm:px-10 lg:px-16">
-      <!-- Section Heading -->
-      <div class="text-center mb-10 sm:mb-12 lg:mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-3">
-          Daily Classes
-        </h2>
+  <!-- ================= BHAKTI PREMA SWAMI VENTURE ================= -->
+  <section class="bg-white py-16 md:py-24 relative">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 bg-dots-pattern opacity-[0.02]"></div>
 
-        <!-- Underline -->
-        <span
-          class="block mx-auto w-16 sm:w-20 md:w-24 lg:w-32 h-1 bg-primary rounded"
-        ></span>
-      </div>
-
-      <!-- Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        <!-- Bangla Class -->
-        <div
-          class="bg-primary text-white rounded-2xl p-8 text-center shadow-md"
-        >
-          <h3 class="text-xl font-semibold mb-4">Bangla</h3>
-
-          <p class="text-lg mb-4">9:30 AM – 10:00 AM</p>
-
-          <p class="text-sm mb-1 opacity-90">Meeting ID : 6790009886</p>
-
-          <p class="text-sm mb-6 opacity-90">Passcode : 123456</p>
-
-          <button
-            class="border border-white px-6 py-2 rounded-lg font-medium
-                 hover:bg-white hover:text-primary transition"
-          >
-            Join
-          </button>
-        </div>
-
-        <!-- Hindi Class -->
-        <div
-          class="bg-white text-text-body rounded-2xl p-8 text-center shadow-md"
-        >
-          <h3 class="text-xl font-semibold mb-4">Hindi</h3>
-
-          <p class="text-lg mb-4">2:30 PM – 3:00 PM</p>
-
-          <p class="text-sm mb-1">Meeting ID : 6790009886</p>
-
-          <p class="text-sm mb-6">Passcode : 123456</p>
-
-          <button
-            class="border border-primary px-6 py-2 rounded-lg font-medium
-                 text-primary hover:bg-primary hover:text-white transition"
-          >
-            Join
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section Border Divider -->
-  <div class="h-2 sm:h-3 lg:h-4 bg-primary-hover"></div>
-
-  <!-- ================= BHAGTI PREMA SWAMI VENTURE ================= -->
-  <section class="bg-white py-12 sm:py-16 lg:py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <!-- ================= PAGE HEADER ================= -->
-      <div class="text-center py-6 sm:py-8 lg:py-10">
-        <h1
-          class="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-primary mb-4"
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4"
         >
-          Bhakti Prema Swami Ventures
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <span class="text-sm font-semibold">Service Initiatives</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Spiritual Ventures
         </h1>
 
+        <!-- Underline -->
         <div class="flex justify-center">
-          <span
-            class="w-16 sm:w-20 md:w-24 lg:w-32 h-0.5 sm:h-1 bg-primary rounded"
-          ></span>
+          <div
+            class="w-32 h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full mb-8"
+          >
+          </div>
         </div>
 
-        <p
-          class="text-sm sm:text-base md:text-md lg:text-lg text-text-body mt-6 max-w-3xl mx-auto leading-relaxed"
-        >
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           Initiatives dedicated to spreading Bhakti Yoga through education,
           spiritual retreats, and compassionate community service.
         </p>
       </div>
 
       <!-- ================= VENTURE CARDS ================= -->
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 mt-10"
-      >
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- ================= CARD 1 ================= -->
         <div
-          class="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
         >
-          <img
-            src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d"
-            alt="Spiritual Education"
-            class="w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover"
-          />
-
-          <div class="p-5 sm:p-6 lg:p-8">
-            <h3
-              class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-primary mb-3"
+          <!-- Image Container -->
+          <div class="relative overflow-hidden h-64">
+            <img
+              src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d"
+              alt="Spiritual Education"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <!-- Overlay -->
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
             >
+            </div>
+            <!-- Icon -->
+            <div
+              class="absolute top-4 right-4 w-12 h-12 bg-white/90 rounded-xl flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-primary"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">
               Spiritual Education
             </h3>
-
-            <p class="text-sm sm:text-base text-text-body leading-relaxed mb-5">
+            <p class="text-gray-600 leading-relaxed mb-6">
               Structured learning programs, workshops, and courses that explore
               Bhakti Yoga philosophy and practical spiritual wisdom.
             </p>
-
             <a
               href="/ventures/education"
-              class="block text-center bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors"
+              class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-hover text-white w-full py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group/btn"
             >
               Learn More
+              <svg
+                class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
             </a>
           </div>
         </div>
 
         <!-- ================= CARD 2 ================= -->
         <div
-          class="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
         >
-          <img
-            src="https://images.unsplash.com/photo-1525097487452-6278ff080c31"
-            alt="Retreats & Satsangs"
-            class="w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover"
-          />
-
-          <div class="p-5 sm:p-6 lg:p-8">
-            <h3
-              class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-primary mb-3"
+          <!-- Image Container -->
+          <div class="relative overflow-hidden h-64">
+            <img
+              src="https://images.unsplash.com/photo-1525097487452-6278ff080c31"
+              alt="Retreats & Satsangs"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <!-- Overlay -->
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
             >
+            </div>
+            <!-- Icon -->
+            <div
+              class="absolute top-4 right-4 w-12 h-12 bg-white/90 rounded-xl flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-primary"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">
               Retreats & Satsangs
             </h3>
-
-            <p class="text-sm sm:text-base text-text-body leading-relaxed mb-5">
+            <p class="text-gray-600 leading-relaxed mb-6">
               Peaceful retreats and satsangs designed to deepen devotion,
               reflection, and connection with the spiritual community.
             </p>
-
             <a
               href="/ventures/retreats"
-              class="block text-center bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors"
+              class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-hover text-white w-full py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group/btn"
             >
               Learn More
+              <svg
+                class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
             </a>
           </div>
         </div>
 
         <!-- ================= CARD 3 ================= -->
         <div
-          class="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
         >
-          <img
-            src="https://images.unsplash.com/photo-1593113598332-cd288d649433"
-            alt="Community Service"
-            class="w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover"
-          />
-
-          <div class="p-5 sm:p-6 lg:p-8">
-            <h3
-              class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-primary mb-3"
+          <!-- Image Container -->
+          <div class="relative overflow-hidden h-64">
+            <img
+              src="https://images.unsplash.com/photo-1593113598332-cd288d649433"
+              alt="Community Service"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <!-- Overlay -->
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
             >
+            </div>
+            <!-- Icon -->
+            <div
+              class="absolute top-4 right-4 w-12 h-12 bg-white/90 rounded-xl flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-primary"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">
               Community Service
             </h3>
-
-            <p class="text-sm sm:text-base text-text-body leading-relaxed mb-5">
+            <p class="text-gray-600 leading-relaxed mb-6">
               Outreach initiatives focused on food distribution, counseling, and
               humanitarian service rooted in compassion.
             </p>
-
             <a
               href="/ventures/service"
-              class="block text-center bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary-hover transition-colors"
+              class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-hover text-white w-full py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group/btn"
             >
               Learn More
+              <svg
+                class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
             </a>
           </div>
         </div>
       </div>
 
       <!-- ================= SEE MORE ================= -->
-      <div class="text-center mt-12">
+      <div class="text-center mt-16">
         <a
           href="/ventures"
-          class="inline-block bg-primary text-white px-8 sm:px-10 lg:px-12 py-3 sm:py-3.5 rounded-full text-sm sm:text-base lg:text-lg font-semibold hover:bg-primary-hover transition-colors shadow-lg hover:shadow-xl"
+          class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-hover text-white px-10 py-5 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group"
         >
           See All Ventures
+          <svg
+            class="w-6 h-6 group-hover:translate-x-1 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
         </a>
       </div>
     </div>
   </section>
 
   <!-- Section Border Divider -->
-  <div class="h-2 sm:h-3 lg:h-4 bg-primary-hover"></div>
+  <div
+    class="h-1 bg-gradient-to-r from-primary-hover/0 via-primary-hover to-primary-hover/0"
+  >
+  </div>
 
   <!-- ================= CONTACT SECTION ================= -->
-  <section class="bg-section-bg min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-16">
+  <section
+    class="bg-gradient-to-b from-section-bg to-white py-16 md:py-24 relative"
+  >
+    <!-- Background Elements -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
+    <div
+      class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent"
+    >
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <!-- Page Title -->
-      <div class="text-center mb-8 sm:mb-12 lg:mb-16">
-        <h1
-          class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-3"
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4"
         >
-          Get in Touch
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+            ></path>
+          </svg>
+          <span class="text-sm font-semibold">Get in Touch</span>
+        </div>
+
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+        >
+          Connect With Us
         </h1>
 
         <!-- Underline -->
-        <span
-          class="block mx-auto w-16 sm:w-20 md:w-24 lg:w-32 h-1 bg-primary rounded"
-        ></span>
+        <div class="flex justify-center">
+          <div
+            class="w-32 h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full"
+          >
+          </div>
+        </div>
       </div>
 
-      <div
-        class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-start relative"
-      >
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
         <!-- Contact Form Section -->
         <div class="w-full">
-          <form class="space-y-4 sm:space-y-6">
-            <!-- Full Name Input -->
-            <div>
-              <input
-                type="text"
-                placeholder="Full Name"
-                class="w-full bg-primary text-white placeholder-white/70 px-4 sm:px-6 py-3 sm:py-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
-              />
-            </div>
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <form class="space-y-6">
+              <!-- Full Name Input -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  class="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-500 px-6 py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                />
+              </div>
 
-            <!-- Email Input -->
-            <div>
-              <input
-                type="email"
-                placeholder="Email"
-                class="w-full bg-primary text-white placeholder-white/70 px-4 sm:px-6 py-3 sm:py-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
-              />
-            </div>
+              <!-- Email Input -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  class="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-500 px-6 py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                />
+              </div>
 
-            <!-- Contact Number Input -->
-            <div>
-              <input
-                type="tel"
-                placeholder="Contact number"
-                class="w-full bg-primary text-white placeholder-white/70 px-4 sm:px-6 py-3 sm:py-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
-              />
-            </div>
+              <!-- Contact Number Input -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Contact Number</label
+                >
+                <input
+                  type="tel"
+                  placeholder="Enter your contact number"
+                  class="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-500 px-6 py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                />
+              </div>
 
-            <!-- Message Textarea -->
-            <div>
-              <textarea
-                placeholder="Message"
-                rows="6"
-                class="w-full bg-primary text-white placeholder-white/70 px-4 sm:px-6 py-3 sm:py-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm sm:text-base"
-              ></textarea>
-            </div>
+              <!-- Message Textarea -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Message</label
+                >
+                <textarea
+                  placeholder="Write your message here..."
+                  rows="6"
+                  class="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-500 px-6 py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none transition-all duration-300"
+                ></textarea>
+              </div>
 
-            <!-- Submit Button -->
-            <div>
-              <button
-                type="submit"
-                class="w-full bg-primary-hover text-white py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-primary transition-colors shadow-lg"
-              >
-                Send Message
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!-- Divider Line - Hidden on mobile, shown on lg -->
-        <div
-          class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary"
-        >
+              <!-- Submit Button -->
+              <div>
+                <button
+                  type="submit"
+                  class="w-full bg-gradient-to-r from-primary to-primary-hover text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+                >
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
 
         <!-- Email and Social Media Section -->
-        <div
-          class="flex flex-col items-center lg:items-start justify-start space-y-8 sm:space-y-10 lg:space-y-12 lg:pl-12 mt-8 sm:mt-10 lg:mt-0"
-        >
+        <div class="space-y-12">
           <!-- Email Section -->
-          <div class="text-center lg:text-left">
-            <h2
-              class="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-4 sm:mb-6"
-            >
-              Email :
-            </h2>
-            <a
-              href="mailto:contact@bhaktiprema.com"
-              class="text-base sm:text-lg md:text-xl text-text-body hover:text-primary transition-colors break-words"
-            >
-              contact@bhaktiprema.com
-            </a>
-          </div>
-
-          <!-- Social Media Icons -->
-          <div class="space-y-6 w-full">
-            <!-- First Row of Icons -->
-            <div class="flex justify-center md:justify-start">
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex items-start gap-4">
               <div
-                class="grid grid-cols-4 gap-3 sm:gap-4 max-w-xs sm:max-w-none"
+                class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"
               >
-                <!-- Facebook -->
-                <a
-                  href="#"
-                  class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-[#3b5998] rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                <svg
+                  class="w-6 h-6 text-primary"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                    ></path>
-                  </svg>
-                </a>
-
-                <!-- Instagram -->
+                  <path
+                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-3">Email Us</h2>
                 <a
-                  href="#"
-                  class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888] rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                  href="mailto:contact@bhaktiprema.com"
+                  class="text-lg text-primary hover:text-primary-hover transition-colors break-all"
                 >
-                  <svg
-                    class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
-                    ></path>
-                  </svg>
-                </a>
-
-                <!-- WhatsApp -->
-                <a
-                  href="#"
-                  class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-[#25D366] rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
-                >
-                  <svg
-                    class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.75-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335 .157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
-                    ></path>
-                  </svg>
-                </a>
-
-                <!-- Pinterest -->
-                <a
-                  href="#"
-                  class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-[#E60023] rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
-                >
-                  <svg
-                    class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"
-                    ></path>
-                  </svg>
+                  contact@bhaktiprema.com
                 </a>
               </div>
             </div>
+          </div>
 
-            <!-- Second Row of Icons -->
-            <div class="flex justify-center md:justify-start mt-4">
-              <div
-                class="grid grid-cols-3 gap-3 sm:gap-4 max-w-xs sm:max-w-none"
+          <!-- Social Media Section -->
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Follow Us</h2>
+
+            <!-- Social Icons Grid -->
+            <div class="grid grid-cols-3 gap-4">
+              <!-- Facebook -->
+              <a
+                href="#"
+                class="group relative bg-[#3b5998] rounded-xl p-4 flex items-center justify-center hover:scale-105 transition-transform duration-300 shadow-lg"
               >
-                <!-- LinkedIn -->
-                <a
-                  href="#"
-                  class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-[#0077b5] rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                    ></path>
-                  </svg>
-                </a>
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  ></path>
+                </svg>
+              </a>
 
-                <!-- Twitter -->
-                <a
-                  href="#"
-                  class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-[#1DA1F2] rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+              <!-- Instagram -->
+              <a
+                href="#"
+                class="group relative bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888] rounded-xl p-4 flex items-center justify-center hover:scale-105 transition-transform duration-300 shadow-lg"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
-                    ></path>
-                  </svg>
-                </a>
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  ></path>
+                </svg>
+              </a>
 
-                <!-- YouTube -->
-                <a
-                  href="#"
-                  class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-[#FF0000] rounded-lg flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+              <!-- WhatsApp -->
+              <a
+                href="#"
+                class="group relative bg-[#25D366] rounded-xl p-4 flex items-center justify-center hover:scale-105 transition-transform duration-300 shadow-lg"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
-                    ></path>
-                  </svg>
-                </a>
-              </div>
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.75-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335 .157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                  ></path>
+                </svg>
+              </a>
+
+              <!-- YouTube -->
+              <a
+                href="#"
+                class="group relative bg-[#FF0000] rounded-xl p-4 flex items-center justify-center hover:scale-105 transition-transform duration-300 shadow-lg"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                  ></path>
+                </svg>
+              </a>
+
+              <!-- Twitter -->
+              <a
+                href="#"
+                class="group relative bg-[#1DA1F2] rounded-xl p-4 flex items-center justify-center hover:scale-105 transition-transform duration-300 shadow-lg"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                  ></path>
+                </svg>
+              </a>
+
+              <!-- LinkedIn -->
+              <a
+                href="#"
+                class="group relative bg-[#0077b5] rounded-xl p-4 flex items-center justify-center hover:scale-105 transition-transform duration-300 shadow-lg"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  ></path>
+                </svg>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Add these styles to your global CSS -->
+  <style>
+    .bg-grid-pattern {
+      background-image:
+        linear-gradient(to right, #0000000a 1px, transparent 1px),
+        linear-gradient(to bottom, #0000000a 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .bg-dots-pattern {
+      background-image: radial-gradient(#0000000a 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .bg-quote-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .font-pacifico {
+      font-family:
+        "Pacifico",
+        cursive,
+        system-ui,
+        -apple-system,
+        sans-serif;
+    }
+  </style>
 </Layout>

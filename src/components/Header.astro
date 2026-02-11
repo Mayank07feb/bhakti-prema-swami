@@ -32,7 +32,6 @@
             </span>
           </a>
 
-          <!-- Dropdown -->
           <div
             class="absolute left-0 top-full mt-3 w-64 bg-white shadow-xl rounded-md
                    opacity-0 invisible group-hover:opacity-100 group-hover:visible
@@ -41,11 +40,9 @@
             <a href="/srila-prabhupada" class="block px-5 py-3 text-sm hover:bg-gray-100">
               Srila Prabhupada
             </a>
-
             <a href="/bhakti-charu-swami" class="block px-5 py-3 text-sm hover:bg-gray-100">
               HH Bhakti Charu Swami Maharaja
             </a>
-
             <a href="/bhakti-prema-swami" class="block px-5 py-3 text-sm hover:bg-gray-100">
               Bhakti Prema Swami
             </a>
@@ -54,9 +51,28 @@
 
         <span class="text-gray-400 text-lg">|</span>
 
-        <a href="/media" class="nav-link text-gray-700 hover:text-primary" data-path="/media">
-          MEDIA
-        </a>
+        <!-- MEDIA Dropdown -->
+        <div class="relative group">
+          <a href="/media" class="nav-link flex items-center gap-1" data-path="/media">
+            MEDIA
+            <span class="material-icons text-lg transition-transform duration-200 group-hover:rotate-180">
+              expand_more
+            </span>
+          </a>
+
+          <div
+            class="absolute left-0 top-full mt-3 w-56 bg-white shadow-xl rounded-md
+                   opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                   transition-all duration-200 z-50"
+          >
+            <a href="/media" class="block px-5 py-3 text-sm hover:bg-gray-100">
+              Video Lectures
+            </a>
+            <a href="/vani" class="block px-5 py-3 text-sm hover:bg-gray-100">
+              Vani
+            </a>
+          </div>
+        </div>
 
         <span class="text-gray-400 text-lg">|</span>
 
@@ -106,7 +122,19 @@
           <a href="/bhakti-prema-swami" class="mobile-nav-link">Bhakti Prema Swami</a>
         </div>
 
-        <a href="/media" class="mobile-nav-link font-semibold">MEDIA</a>
+        <!-- Mobile MEDIA Dropdown -->
+        <button id="mobileMediaBtn" class="flex justify-between items-center font-semibold text-lg">
+          MEDIA
+          <span id="mobileMediaIcon" class="material-icons transition-transform">
+            expand_more
+          </span>
+        </button>
+
+        <div id="mobileMediaMenu" class="hidden ml-4 flex flex-col space-y-2">
+          <a href="/media" class="mobile-nav-link">Video Lectures</a>
+          <a href="/vani" class="mobile-nav-link">Vani</a>
+        </div>
+
         <a href="/books" class="mobile-nav-link font-semibold">BOOKS</a>
         <a href="/connect" class="mobile-nav-link font-semibold">CONNECT</a>
         <a href="/calendar" class="mobile-nav-link font-semibold">CALENDAR</a>
@@ -125,6 +153,10 @@
   const mobileAboutMenu = document.getElementById("mobileAboutMenu");
   const mobileAboutIcon = document.getElementById("mobileAboutIcon");
 
+  const mobileMediaBtn = document.getElementById("mobileMediaBtn");
+  const mobileMediaMenu = document.getElementById("mobileMediaMenu");
+  const mobileMediaIcon = document.getElementById("mobileMediaIcon");
+
   mobileMenuBtn.onclick = () => {
     mobileMenu.classList.toggle("hidden");
     menuIcon.textContent = mobileMenu.classList.contains("hidden") ? "menu" : "close";
@@ -133,6 +165,11 @@
   mobileAboutBtn.onclick = () => {
     mobileAboutMenu.classList.toggle("hidden");
     mobileAboutIcon.classList.toggle("rotate-180");
+  };
+
+  mobileMediaBtn.onclick = () => {
+    mobileMediaMenu.classList.toggle("hidden");
+    mobileMediaIcon.classList.toggle("rotate-180");
   };
 
   document.addEventListener("DOMContentLoaded", () => {

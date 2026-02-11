@@ -43,7 +43,7 @@ export const seoData = {
   media: {
     meta_title: "Media - Bhakti Prema Swami",
     meta_description:
-      "Explore videos, audios, and photo galleries of Bhakti Prema Swami’s teachings, lectures, and events.",
+      "Explore videos, audios, and photo galleries of Bhakti Prema Swami's teachings, lectures, and events.",
   },
 
   books: {
@@ -55,7 +55,7 @@ export const seoData = {
   connect: {
     meta_title: "Connect - Bhakti Prema Swami",
     meta_description:
-      "Connect with Bhakti Prema Swami’s mission for guidance, events, community programs, and spiritual support.",
+      "Connect with Bhakti Prema Swami's mission for guidance, events, community programs, and spiritual support.",
   },
 
   calendar: {
@@ -80,5 +80,17 @@ export const seoData = {
     meta_title: "Privacy Policy - Bhakti Prema Swami",
     meta_description:
       "Understand how Bhakti Prema Swami collects, uses, and protects your personal information.",
+  },
+
+  vani: {
+    meta_title: "Vani - Bhakti Prema Swami",
+    meta_description:
+      "Explore the sacred teachings and transcriptions of Bhakti Prema Swami's lectures, classes, and spiritual discourses.",
+  },
+
+  "vani-detail": {
+    meta_title: "Vani - Bhakti Prema Swami",
+    meta_description:
+      "Read and listen to detailed transcriptions of spiritual lectures and teachings by Bhakti Prema Swami.",
   },
 };
