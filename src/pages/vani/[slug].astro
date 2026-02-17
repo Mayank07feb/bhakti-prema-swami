@@ -1,35 +1,93 @@
 ---
+// src/pages/vani/[slug].astro
 import Layout from "../../layouts/Layout.astro";
+import { API } from "../../config/api";
 
 export const prerender = false;
 
-// Get the slug from the URL
 const { slug } = Astro.params;
 
-// Fetch all vani data from API
-const response = await fetch(`${Astro.url.origin}/api/vani.json`);
-const vaniData = await response.json();
-
-// Find the lecture by slug
-const vani = vaniData.lectures.find(lecture => lecture.slug === slug);
-
-// If not found, return 404
-if (!vani) {
-  return Astro.redirect('/404');
+// ── Helper ────────────────────────────────────────────────────
+function formatDate(d: string | null): string {
+  if (!d) return "";
+  return new Date(d).toLocaleDateString("en-IN", {
+    day: "numeric", month: "long", year: "numeric",
+  });
 }
 
-// Find previous and next lectures
-const currentIndex = vaniData.lectures.findIndex(l => l.slug === slug);
-const prevLecture = currentIndex > 0 ? vaniData.lectures[currentIndex - 1] : null;
-const nextLecture = currentIndex < vaniData.lectures.length - 1 ? vaniData.lectures[currentIndex + 1] : null;
+// ── Fetch single lecture ──────────────────────────────────────
+// If slug is numeric → GET /transcript/:id
+// If slug is string  → GET /transcript/slug/:slug
+let vani: any = null;
+let prevLecture: any = null;
+let nextLecture: any = null;
+
+try {
+  let row: any = null;
+  const isNumeric = /^\d+$/.test(slug ?? "");
+
+  if (isNumeric) {
+    const res  = await fetch(API.transcriptById(slug!));
+    const json = await res.json();
+    if (json.success && json.data) row = json.data;
+  } else {
+    const res  = await fetch(API.transcriptBySlug(slug!));
+    const json = await res.json();
+    if (json.success && json.data) row = json.data;
+  }
+
+  if (!row) return Astro.redirect("/404");
+
+  // ✅ /transcript/slug/:slug returns category_names[] & location_names[] directly
+  vani = {
+    id:          row.id,
+    slug:        row.slug || String(row.id),
+    title:       row.name              || "Untitled",
+    description: row.description       || "",
+    date:        formatDate(row.publish_date),
+    categories:  row.category_names    || [],
+    location:   (row.location_names    || []).join(", "),
+    audio: {
+      available: row.is_audio_available === "YES",
+      url:       row.audio_url || null,
+    },
+    media:     row.media               || [],
+    link:      row.link                || null,
+    metaTitle: row.meta_title          || null,
+    metaDesc:  row.meta_description    || null,
+  };
+
+  // ── Prev / Next ───────────────────────────────────────────
+  // /transcript/filters now has category_names, location_names, audio field
+  try {
+    const listRes  = await fetch(API.transcriptFilters);
+    const listJson = await listRes.json();
+    const allList  = (listJson.data || []);
+
+    const idx = allList.findIndex((r: any) => r.id === vani.id);
+    if (idx > 0) {
+      const p = allList[idx - 1];
+      prevLecture = { slug: p.slug || String(p.id), title: p.name || "Previous" };
+    }
+    if (idx !== -1 && idx < allList.length - 1) {
+      const n = allList[idx + 1];
+      nextLecture = { slug: n.slug || String(n.id), title: n.name || "Next" };
+    }
+  } catch (_) { /* non-critical */ }
+
+} catch (err) {
+  console.error("[vani/slug] fetch error:", err);
+  return Astro.redirect("/404");
+}
+
+if (!vani) return Astro.redirect("/404");
 ---
 
 <Layout page="vani-detail">
 
-  <!-- ================= PAGE HEADER ================= -->
+  <!-- PAGE HEADER -->
   <section class="bg-white py-6 sm:py-8 lg:py-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <!-- Breadcrumb -->
       <nav class="mb-4 sm:mb-6 flex items-center gap-2 text-xs sm:text-sm text-text-body/60">
         <a href="/vani" class="hover:text-primary transition-colors truncate">Vani</a>
         <svg class="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -37,118 +95,91 @@ const nextLecture = currentIndex < vaniData.lectures.length - 1 ? vaniData.lectu
         </svg>
         <span class="text-text-body font-medium truncate">{vani.title}</span>
       </nav>
-
       <h1 class="font-pacifico text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary mb-3 sm:mb-4 break-words">
         {vani.title}
       </h1>
-      
       <span class="block w-16 sm:w-20 h-1 bg-primary rounded-full"></span>
     </div>
   </section>
 
-  <!-- ── Strip divider ── -->
   <div class="h-2 bg-primary-hover"></div>
 
-  <!-- ================= MAIN CONTENT ================= -->
+  <!-- MAIN -->
   <section class="bg-section-bg min-h-screen">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 lg:py-12">
 
-      <!-- Meta info -->
+      <!-- Meta row -->
       <div class="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-text-body/70 mb-6 sm:mb-8">
-        <div class="flex items-center gap-1.5 sm:gap-2">
-          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-          <span>{vani.date}</span>
-        </div>
-        <div class="flex items-center gap-1.5 sm:gap-2">
-          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-          <span>{vani.location}</span>
-        </div>
+        {vani.date && (
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span>{vani.date}</span>
+          </div>
+        )}
+        {vani.location && (
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span>{vani.location}</span>
+          </div>
+        )}
+        {vani.categories.length > 0 && (
+          <div class="flex items-center gap-1.5 flex-wrap">
+            {vani.categories.map((cat: string) => (
+              <span class="inline-flex items-center bg-primary/10 text-primary text-xs font-semibold px-2.5 py-0.5 rounded-full">{cat}</span>
+            ))}
+          </div>
+        )}
         {vani.audio.available && (
-          <div class="flex items-center gap-1.5 sm:gap-2">
+          <div class="flex items-center gap-1.5">
             <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 text-primary" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
             </svg>
-            <span class="text-primary font-medium">{vani.audio.duration}</span>
+            <span class="text-primary font-medium">Audio Available</span>
           </div>
         )}
       </div>
 
-      <!-- Audio Player (Mobile - Top Position) -->
-      {vani.audio.available && (
+      <!-- Audio Player Mobile -->
+      {vani.audio.available && vani.audio.url && (
         <div class="lg:hidden mb-6">
-          <div class="bg-white rounded-xl border border-text-body/10 shadow-sm overflow-hidden p-4">
+          <div class="bg-white rounded-xl border border-text-body/10 shadow-sm p-4">
             <h3 class="text-sm font-bold text-text-body mb-3">Audio Player</h3>
-            
             <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-3 sm:p-4 border border-primary/20">
-              <!-- Waveform visualization placeholder -->
-              <div class="flex items-center justify-center gap-0.5 sm:gap-1 h-12 sm:h-16 mb-3">
+              <div class="flex items-center justify-center gap-0.5 h-12 sm:h-16 mb-3">
                 {Array.from({ length: 30 }).map((_, i) => (
-                  <div 
-                    class="waveform-bar bg-primary/30 w-0.5 sm:w-1 rounded-full transition-all duration-200"
-                    style={`height: ${Math.random() * 60 + 20}%`}
-                  ></div>
+                  <div class="waveform-bar bg-primary/30 w-0.5 sm:w-1 rounded-full" style={`height:${Math.floor(Math.random()*60+20)}%`}></div>
                 ))}
               </div>
-
-              <!-- Progress bar -->
               <div class="mb-3">
-                <input 
-                  type="range" 
-                  id="audio-progress-mobile" 
-                  class="audio-slider w-full h-1.5 bg-primary/20 rounded-full appearance-none cursor-pointer"
-                  min="0" 
-                  max="100" 
-                  value="0"
-                />
-                <div class="flex justify-between items-center mt-1.5 text-xs text-text-body/60">
+                <input type="range" class="audio-slider w-full h-1.5 bg-primary/20 rounded-full appearance-none cursor-pointer" min="0" max="100" value="0"/>
+                <div class="flex justify-between mt-1.5 text-xs text-text-body/60">
                   <span class="current-time">0:00</span>
-                  <span class="total-time">{vani.audio.duration}</span>
+                  <span class="total-time">--:--</span>
                 </div>
               </div>
-
-              <!-- Controls -->
               <div class="flex items-center justify-center gap-2 sm:gap-3">
-                <button type="button" class="rewind-btn p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors" title="Rewind 10 seconds">
-                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"/>
-                  </svg>
+                <button type="button" class="rewind-btn p-1.5 sm:p-2 text-text-body/60 hover:text-primary transition-colors">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"/></svg>
                 </button>
-
-                <button type="button" class="play-pause-btn w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg transition-all duration-200 hover:bg-primary-hover hover:shadow-xl hover:scale-105 active:scale-95">
-                  <svg class="play-icon w-5 h-5 sm:w-6 sm:h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                  <svg class="pause-icon w-5 h-5 sm:w-6 sm:h-6 hidden" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-                  </svg>
+                <button type="button" class="play-pause-btn w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg hover:bg-primary-hover hover:scale-105 active:scale-95 transition-all duration-200">
+                  <svg class="play-icon w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  <svg class="pause-icon w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
                 </button>
-
-                <button type="button" class="forward-btn p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors" title="Forward 10 seconds">
-                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"/>
-                  </svg>
+                <button type="button" class="forward-btn p-1.5 sm:p-2 text-text-body/60 hover:text-primary transition-colors">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"/></svg>
                 </button>
-
-                <button type="button" class="volume-btn p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors">
-                  <svg class="volume-icon w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
-                  </svg>
-                  <svg class="mute-icon w-4 h-4 sm:w-5 sm:h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
-                  </svg>
+                <button type="button" class="volume-btn p-1.5 sm:p-2 text-text-body/60 hover:text-primary transition-colors">
+                  <svg class="volume-icon w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+                  <svg class="mute-icon w-4 h-4 sm:w-5 sm:h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>
                 </button>
               </div>
-
-              <a href={vani.audio.url} download class="mt-3 sm:mt-4 w-full flex items-center justify-center gap-2 bg-white border border-primary/30 text-primary px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary active:scale-95">
-                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                </svg>
+              <a href={vani.audio.url} download class="mt-3 w-full flex items-center justify-center gap-2 bg-white border border-primary/30 text-primary px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-primary hover:text-white hover:border-primary active:scale-95 transition-all duration-200">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 Download Audio
               </a>
             </div>
@@ -158,97 +189,133 @@ const nextLecture = currentIndex < vaniData.lectures.length - 1 ? vaniData.lectu
 
       <div class="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8">
 
-        <!-- ============ SIDEBAR (Desktop) ============ -->
-        <aside class="lg:sticky lg:top-6 self-start">
-          <div class="bg-white rounded-xl border border-text-body/10 shadow-sm overflow-hidden">
+        <!-- SIDEBAR -->
+        <aside class="lg:sticky lg:top-6 self-start space-y-4">
 
-            {vani.audio.available && (
-              <div class="hidden lg:block p-4">
-                <h3 class="text-sm font-bold text-text-body mb-3 px-2">Audio Player</h3>
-                
-                <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-3 sm:p-4 border border-primary/20">
-                  <div class="flex items-center justify-center gap-0.5 sm:gap-1 h-12 sm:h-16 mb-3">
-                    {Array.from({ length: 30 }).map((_, i) => (
-                      <div class="waveform-bar bg-primary/30 w-0.5 sm:w-1 rounded-full transition-all duration-200" style={`height: ${Math.random() * 60 + 20}%`}></div>
-                    ))}
+          {vani.audio.available && vani.audio.url && (
+            <div class="hidden lg:block bg-white rounded-xl border border-text-body/10 shadow-sm overflow-hidden p-4">
+              <h3 class="text-sm font-bold text-text-body mb-3 px-2">Audio Player</h3>
+              <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 border border-primary/20">
+                <div class="flex items-center justify-center gap-1 h-16 mb-3">
+                  {Array.from({ length: 30 }).map((_, i) => (
+                    <div class="waveform-bar bg-primary/30 w-1 rounded-full" style={`height:${Math.floor(Math.random()*60+20)}%`}></div>
+                  ))}
+                </div>
+                <div class="mb-3">
+                  <input type="range" class="audio-slider w-full h-1.5 bg-primary/20 rounded-full appearance-none cursor-pointer" min="0" max="100" value="0"/>
+                  <div class="flex justify-between mt-1.5 text-xs text-text-body/60">
+                    <span class="current-time">0:00</span>
+                    <span class="total-time">--:--</span>
                   </div>
+                </div>
+                <div class="flex items-center justify-center gap-3">
+                  <button type="button" class="rewind-btn p-2 text-text-body/60 hover:text-primary transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"/></svg>
+                  </button>
+                  <button type="button" class="play-pause-btn w-12 h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg hover:bg-primary-hover hover:scale-105 active:scale-95 transition-all duration-200">
+                    <svg class="play-icon w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                  </button>
+                  <button type="button" class="forward-btn p-2 text-text-body/60 hover:text-primary transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"/></svg>
+                  </button>
+                  <button type="button" class="volume-btn p-2 text-text-body/60 hover:text-primary transition-colors">
+                    <svg class="volume-icon w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+                    <svg class="mute-icon w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>
+                  </button>
+                </div>
+                <a href={vani.audio.url} download class="mt-4 w-full flex items-center justify-center gap-2 bg-white border border-primary/30 text-primary px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary hover:text-white hover:border-primary active:scale-95 transition-all duration-200">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                  Download Audio
+                </a>
+              </div>
+            </div>
+          )}
 
-                  <div class="mb-3">
-                    <input type="range" id="audio-progress-desktop" class="audio-slider w-full h-1.5 bg-primary/20 rounded-full appearance-none cursor-pointer" min="0" max="100" value="0" />
-                    <div class="flex justify-between items-center mt-1.5 text-xs text-text-body/60">
-                      <span class="current-time">0:00</span>
-                      <span class="total-time">{vani.audio.duration}</span>
-                    </div>
-                  </div>
-
-                  <div class="flex items-center justify-center gap-2 sm:gap-3">
-                    <button type="button" class="rewind-btn p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors">
-                      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"/></svg>
-                    </button>
-                    <button type="button" class="play-pause-btn w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg transition-all duration-200 hover:bg-primary-hover hover:shadow-xl hover:scale-105 active:scale-95">
-                      <svg class="play-icon w-5 h-5 sm:w-6 sm:h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                      <svg class="pause-icon w-5 h-5 sm:w-6 sm:h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
-                    </button>
-                    <button type="button" class="forward-btn p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors">
-                      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"/></svg>
-                    </button>
-                    <button type="button" class="volume-btn p-1.5 sm:p-2 text-text-body/60 hover:text-primary active:text-primary transition-colors">
-                      <svg class="volume-icon w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
-                      <svg class="mute-icon w-4 h-4 sm:w-5 sm:h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>
-                    </button>
-                  </div>
-
-                  <a href={vani.audio.url} download class="mt-3 sm:mt-4 w-full flex items-center justify-center gap-2 bg-white border border-primary/30 text-primary px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary active:scale-95">
-                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                    Download Audio
-                  </a>
+          <!-- Categories + Share -->
+          <div class="hidden lg:block bg-white rounded-xl border border-text-body/10 shadow-sm overflow-hidden">
+            {vani.categories.length > 0 && (
+              <div class="p-4 border-b border-text-body/10">
+                <p class="text-xs font-semibold text-text-body/40 uppercase tracking-wider mb-2">Categories</p>
+                <div class="flex flex-wrap gap-1.5">
+                  {vani.categories.map((cat: string) => (
+                    <span class="inline-flex items-center bg-primary/10 text-primary text-xs font-semibold px-2.5 py-0.5 rounded-full">{cat}</span>
+                  ))}
                 </div>
               </div>
             )}
-
-            <div class="hidden lg:block p-4 border-t border-text-body/10">
-              <button type="button" class="w-full flex items-center justify-center gap-2 bg-white border border-text-body/20 text-text-body px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 hover:border-primary hover:text-primary active:scale-95">
-                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+            <div class="p-4">
+              <button type="button" class="w-full flex items-center justify-center gap-2 bg-white border border-text-body/20 text-text-body px-4 py-2 rounded-lg text-sm font-semibold hover:border-primary hover:text-primary active:scale-95 transition-all duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
                 Share
               </button>
             </div>
           </div>
+
+          <!-- Media -->
+          {vani.media.length > 0 && (
+            <div class="hidden lg:block bg-white rounded-xl border border-text-body/10 shadow-sm overflow-hidden p-4">
+              <p class="text-xs font-semibold text-text-body/40 uppercase tracking-wider mb-3">Media</p>
+              <div class="flex flex-col gap-2">
+                {vani.media.map((m: any) => (
+                  <a href={m.media_url} target="_blank" rel="noopener noreferrer"
+                    class="flex items-center gap-3 p-2 rounded-lg border border-text-body/10 hover:border-primary hover:bg-orange-50 transition-all duration-150">
+                    {m.thumbnail_url && (
+                      <img src={m.thumbnail_url} alt={m.media_name} class="w-10 h-10 object-cover rounded-md flex-shrink-0"/>
+                    )}
+                    <span class="text-xs font-semibold text-text-body truncate">{m.media_name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
         </aside>
 
-        <!-- ============ PAGE CONTENT ============ -->
+        <!-- CONTENT -->
         <main>
           <div class="bg-white rounded-xl border border-text-body/10 shadow-sm p-4 sm:p-6 lg:p-8">
-            <div class="prose prose-sm sm:prose-base lg:prose-lg max-w-none">
-              {vani.pages.map((page) => (
-                page.content.split('\n\n').map(paragraph => (
-                  <p class="text-text-body text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 last:mb-0">{paragraph}</p>
-                ))
-              ))}
-            </div>
+            {vani.description ? (
+              <div class="prose prose-sm sm:prose-base lg:prose-lg max-w-none">
+                {vani.description.split('\n\n').map((para: string) => (
+                  <p class="text-text-body text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 last:mb-0">{para}</p>
+                ))}
+              </div>
+            ) : (
+              <p class="text-text-body/50 italic text-sm">No content available for this lecture.</p>
+            )}
           </div>
 
-          <!-- ============ NAVIGATION ============ -->
+          {vani.link && (
+            <div class="mt-4">
+              <a href={vani.link} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-primary text-sm font-semibold hover:underline">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                View original source
+              </a>
+            </div>
+          )}
+
+          <!-- Prev / Next -->
           <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
             {prevLecture ? (
-              <a href={`/vani/${prevLecture.slug}`} class="flex items-center justify-center gap-2 bg-white border border-text-body/20 text-text-body px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 hover:border-primary hover:text-primary hover:shadow-md active:scale-95">
+              <a href={`/vani/${prevLecture.slug}`} class="flex items-center justify-center gap-2 bg-white border border-text-body/20 text-text-body px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-sm hover:border-primary hover:text-primary hover:shadow-md active:scale-95 transition-all duration-200">
                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-                <span class="truncate">Previous</span>
+                Previous
               </a>
             ) : (
               <span class="flex items-center justify-center gap-2 bg-white border border-text-body/10 text-text-body/40 px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold cursor-not-allowed">
                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-                <span class="truncate">Previous</span>
+                Previous
               </span>
             )}
-
             {nextLecture ? (
-              <a href={`/vani/${nextLecture.slug}`} class="flex items-center justify-center gap-2 bg-primary text-white px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-primary-hover hover:shadow-lg active:scale-95">
-                <span class="truncate">Next</span>
+              <a href={`/vani/${nextLecture.slug}`} class="flex items-center justify-center gap-2 bg-primary text-white px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-sm hover:bg-primary-hover hover:shadow-lg active:scale-95 transition-all duration-200">
+                Next
                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
               </a>
             ) : (
               <span class="flex items-center justify-center gap-2 bg-primary/40 text-white px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold cursor-not-allowed">
-                <span class="truncate">Next</span>
+                Next
                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
               </span>
             )}
@@ -257,86 +324,78 @@ const nextLecture = currentIndex < vaniData.lectures.length - 1 ? vaniData.lectu
 
       </div>
 
-      {vani.audio.available && <audio id="audio-element" src={vani.audio.url} preload="metadata"></audio>}
+      {vani.audio.available && vani.audio.url && (
+        <audio id="audio-element" src={vani.audio.url} preload="metadata"></audio>
+      )}
     </div>
   </section>
 
 </Layout>
 
 <script>
-const audio = document.getElementById('audio-element') as HTMLAudioElement;
-const playPauseBtns = document.querySelectorAll('.play-pause-btn');
-const rewindBtns = document.querySelectorAll('.rewind-btn');
-const forwardBtns = document.querySelectorAll('.forward-btn');
-const volumeBtns = document.querySelectorAll('.volume-btn');
-const progressBars = document.querySelectorAll('.audio-slider');
-const currentTimes = document.querySelectorAll('.current-time');
-const waveformBars = document.querySelectorAll('.waveform-bar');
+const audio = document.getElementById('audio-element') as HTMLAudioElement | null;
+if (audio) {
+  const playPauseBtns = document.querySelectorAll('.play-pause-btn');
+  const rewindBtns    = document.querySelectorAll('.rewind-btn');
+  const forwardBtns   = document.querySelectorAll('.forward-btn');
+  const volumeBtns    = document.querySelectorAll('.volume-btn');
+  const progressBars  = document.querySelectorAll('.audio-slider');
+  const currentTimes  = document.querySelectorAll('.current-time');
+  const totalTimes    = document.querySelectorAll('.total-time');
+  let isPlaying = false;
+  let isMuted   = false;
 
-let isPlaying = false;
-let isMuted = false;
+  const fmt = (s: number) =>
+    isNaN(s) ? '0:00' : `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 
-function formatTime(seconds: number) {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
+  audio.addEventListener('loadedmetadata', () =>
+    totalTimes.forEach(el => el.textContent = fmt(audio.duration)));
+
+  playPauseBtns.forEach(btn => btn.addEventListener('click', () => {
+    isPlaying ? audio.pause() : audio.play();
+    isPlaying = !isPlaying;
+    document.querySelectorAll('.play-icon').forEach(i  => i.classList.toggle('hidden', isPlaying));
+    document.querySelectorAll('.pause-icon').forEach(i => i.classList.toggle('hidden', !isPlaying));
+  }));
+
+  rewindBtns.forEach(btn  => btn.addEventListener('click', () =>
+    audio.currentTime = Math.max(0, audio.currentTime - 10)));
+  forwardBtns.forEach(btn => btn.addEventListener('click', () =>
+    audio.currentTime = Math.min(audio.duration, audio.currentTime + 10)));
+
+  volumeBtns.forEach(btn => btn.addEventListener('click', () => {
+    isMuted = !isMuted;
+    audio.muted = isMuted;
+    document.querySelectorAll('.volume-icon').forEach(i => i.classList.toggle('hidden', isMuted));
+    document.querySelectorAll('.mute-icon').forEach(i  => i.classList.toggle('hidden', !isMuted));
+  }));
+
+  audio.addEventListener('timeupdate', () => {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    (progressBars as NodeListOf<HTMLInputElement>).forEach(b => b.value = pct.toString());
+    currentTimes.forEach(el => el.textContent = fmt(audio.currentTime));
+  });
+
+  progressBars.forEach((bar: any) => bar.addEventListener('input', (e: Event) => {
+    audio.currentTime = ((e.target as HTMLInputElement).valueAsNumber / 100) * audio.duration;
+  }));
+
+  audio.addEventListener('ended', () => {
+    isPlaying = false;
+    document.querySelectorAll('.play-icon').forEach(i  => i.classList.remove('hidden'));
+    document.querySelectorAll('.pause-icon').forEach(i => i.classList.add('hidden'));
+    (progressBars as NodeListOf<HTMLInputElement>).forEach(b => b.value = '0');
+    currentTimes.forEach(el => el.textContent = '0:00');
+  });
 }
-
-playPauseBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    if (isPlaying) {
-      audio.pause();
-      document.querySelectorAll('.play-icon').forEach(icon => icon.classList.remove('hidden'));
-      document.querySelectorAll('.pause-icon').forEach(icon => icon.classList.add('hidden'));
-      isPlaying = false;
-    } else {
-      audio.play();
-      document.querySelectorAll('.play-icon').forEach(icon => icon.classList.add('hidden'));
-      document.querySelectorAll('.pause-icon').forEach(icon => icon.classList.remove('hidden'));
-      isPlaying = true;
-    }
-  });
-});
-
-rewindBtns.forEach(btn => btn.addEventListener('click', () => audio.currentTime = Math.max(0, audio.currentTime - 10)));
-forwardBtns.forEach(btn => btn.addEventListener('click', () => audio.currentTime = Math.min(audio.duration, audio.currentTime + 10)));
-
-volumeBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    if (isMuted) {
-      audio.muted = false;
-      document.querySelectorAll('.volume-icon').forEach(icon => icon.classList.remove('hidden'));
-      document.querySelectorAll('.mute-icon').forEach(icon => icon.classList.add('hidden'));
-      isMuted = false;
-    } else {
-      audio.muted = true;
-      document.querySelectorAll('.volume-icon').forEach(icon => icon.classList.add('hidden'));
-      document.querySelectorAll('.mute-icon').forEach(icon => icon.classList.remove('hidden'));
-      isMuted = true;
-    }
-  });
-});
-
-audio?.addEventListener('timeupdate', () => {
-  const progress = (audio.currentTime / audio.duration) * 100;
-  progressBars.forEach((bar: any) => bar.value = progress);
-  currentTimes.forEach(time => time.textContent = formatTime(audio.currentTime));
-});
-
-progressBars.forEach((bar: any) => {
-  bar.addEventListener('input', (e: any) => {
-    const time = (e.target.value / 100) * audio.duration;
-    audio.currentTime = time;
-  });
-});
 </script>
 
 <style>
 .prose p { text-align: justify; hyphens: auto; }
 @media (max-width: 640px) { .prose p { text-align: left; hyphens: none; } }
-.audio-slider::-webkit-slider-thumb { appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #f97316; cursor: pointer; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); transition: all 0.2s; }
-@media (min-width: 640px) { .audio-slider::-webkit-slider-thumb { width: 14px; height: 14px; } }
-.audio-slider::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4); }
-.audio-slider::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: #f97316; cursor: pointer; border: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
-.waveform-bar { transition: height 0.2s ease, background-color 0.2s ease; }
+.audio-slider::-webkit-slider-thumb { appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #f97316; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,.2); transition: all .2s; }
+.audio-slider::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: 0 2px 8px rgba(249,115,22,.4); }
+.audio-slider::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: #f97316; cursor: pointer; border: none; }
+.waveform-bar { transition: height .2s ease, background-color .2s ease; }
 </style>

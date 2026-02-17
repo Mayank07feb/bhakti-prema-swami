@@ -1,69 +1,157 @@
 ---
 export const prerender = false;
-
 import Layout from "../layouts/Layout.astro";
 import VaniList from "../components/VaniList.jsx";
+import { API } from "../config/api";
 
-// SERVER-SIDE FETCH
-const response = await fetch(`${Astro.url.origin}/api/vani.json`);
-const vaniData = await response.json();
+// ── Get query params ──────────────────────────────────────────
+const url            = Astro.url;
+const audioFilter    = url.searchParams.getAll("audio");       // "YES" | "NO"
+const categoryFilter = url.searchParams.getAll("category");    // category name strings
+const yearFilter     = url.searchParams.getAll("year");        // "2026" etc.
+const locationFilter = url.searchParams.getAll("location");    // location name strings
+const page           = parseInt(url.searchParams.get("page") || "1");
+const perPage        = 12;
 
-// Get query parameters for filtering
-const url = Astro.url;
-const audioFilter = url.searchParams.getAll("audio");
-const typeFilter = url.searchParams.getAll("type");
-const yearFilter = url.searchParams.getAll("year");
-const locationFilter = url.searchParams.getAll("location");
-const page = parseInt(url.searchParams.get("page") || "1");
+// ── Fetch all APIs in parallel ────────────────────────────────
+const [transcriptRes, categoriesRes, locationsRes] = await Promise.all([
+  fetch(API.transcriptFilters),
+  fetch(API.categories),
+  fetch(API.locations),
+]);
 
-// Server-side filtering
-const filteredLectures = vaniData.lectures.filter((lecture) => {
-  // Audio filter
+const transcriptData = await transcriptRes.json();
+const categoriesData = await categoriesRes.json();
+const locationsData  = await locationsRes.json();
+
+// ── Raw data ──────────────────────────────────────────────────
+// /transcript/filters now returns: { id, name, audio, publish_date, slug, category_names[], location_names[] }
+const allLectures   = transcriptData.data       || [];
+const allCategories = categoriesData.categories || [];
+const allLocations  = locationsData.data        || [];
+
+// ── Normalize lectures ────────────────────────────────────────
+const normalizedLectures = allLectures.map((item: any) => {
+  const publishYear = item.publish_date
+    ? new Date(item.publish_date).getFullYear().toString()
+    : null;
+
+  const publishDateFormatted = item.publish_date
+    ? new Date(item.publish_date).toLocaleDateString("en-IN", {
+        day: "2-digit", month: "short", year: "numeric",
+      })
+    : "—";
+
+  // ✅ New API: category_names & location_names are already resolved strings
+  const categoryNames: string[] = item.category_names || [];
+  const locationNames: string[] = item.location_names || [];
+
+  // ✅ New API: audio field (was is_audio_available)
+  const hasAudio = item.audio === "YES";
+
+  // ✅ slug null → fallback to id
+  const slug = item.slug || String(item.id);
+
+  return {
+    id:            item.id,
+    title:         item.name || "Untitled",
+    slug,
+    date:          publishDateFormatted,
+    year:          publishYear,
+    hasAudio,
+    location:      locationNames.join(", ") || "—",
+    locationNames,
+    categoryNames,
+    category:      categoryNames.join(", ") || "—",
+  };
+});
+
+// ── Server-side filtering ─────────────────────────────────────
+const filteredLectures = normalizedLectures.filter((lecture: any) => {
+
+  // Audio: YES or NO
   if (audioFilter.length > 0) {
-    const hasAudioMatch = audioFilter.includes("has_audio") && lecture.hasAudio;
-    const noAudioMatch = audioFilter.includes("no_audio") && !lecture.hasAudio;
-    if (!hasAudioMatch && !noAudioMatch) return false;
+    const wantsYes = audioFilter.includes("YES");
+    const wantsNo  = audioFilter.includes("NO");
+    if (!(wantsYes && wantsNo)) {
+      if (wantsYes && !lecture.hasAudio) return false;
+      if (wantsNo  &&  lecture.hasAudio) return false;
+    }
   }
 
-  // Type filter
-  if (typeFilter.length > 0) {
-    const typeValue = lecture.type.toLowerCase().replace(/[^a-z0-9]/g, "_");
-    if (!typeFilter.includes(typeValue)) return false;
-  }
-
-  // Year filter
+  // Year
   if (yearFilter.length > 0) {
-    if (!yearFilter.includes(lecture.year)) return false;
+    if (!lecture.year || !yearFilter.includes(lecture.year)) return false;
   }
 
-  // Location filter
+  // Category — filter by name string
+  if (categoryFilter.length > 0) {
+    const hasMatch = categoryFilter.some((name) => lecture.categoryNames.includes(name));
+    if (!hasMatch) return false;
+  }
+
+  // Location — filter by name string
   if (locationFilter.length > 0) {
-    const locationValue = lecture.location.toLowerCase().replace(/[^a-z0-9]/g, "_");
-    if (!locationFilter.includes(locationValue)) return false;
+    const hasMatch = locationFilter.some((name) => lecture.locationNames.includes(name));
+    if (!hasMatch) return false;
   }
 
   return true;
 });
 
-// Pagination
-const perPage = 12;
-const totalRecords = filteredLectures.length;
-const totalPages = Math.ceil(totalRecords / perPage);
-const startIndex = (page - 1) * perPage;
-const endIndex = startIndex + perPage;
-const paginatedLectures = filteredLectures.slice(startIndex, endIndex);
+// ── Pagination ────────────────────────────────────────────────
+const totalRecords      = filteredLectures.length;
+const totalPages        = Math.max(1, Math.ceil(totalRecords / perPage));
+const startIndex        = (page - 1) * perPage;
+const paginatedLectures = filteredLectures.slice(startIndex, startIndex + perPage);
 
-// Prepare data for client
+// ── Filter options ────────────────────────────────────────────
+
+// Audio — static Yes / No (value = "YES"/"NO" to match API field)
+const audioOptions = [
+  { value: "YES", label: "Yes" },
+  { value: "NO",  label: "No"  },
+];
+
+// Year — dynamic 1994 → current year (newest first)
+const currentYear = new Date().getFullYear();
+const startYear   = 1994;
+const yearOptions = Array.from(
+  { length: currentYear - startYear + 1 },
+  (_, i) => { const y = String(currentYear - i); return { value: y, label: y }; }
+);
+
+// Categories — from /categories API (value = name for easy matching)
+const categoryOptions = allCategories.map((cat: any) => ({
+  value: cat.name,
+  label: cat.name,
+}));
+
+// Locations — from /location/all API (value = name for easy matching)
+const locationOptions = allLocations.map((loc: any) => ({
+  value: loc.name,
+  label: loc.name,
+}));
+
+// ── Pass down ─────────────────────────────────────────────────
 const activeFilters = {
-  audio: audioFilter,
-  type: typeFilter,
-  year: yearFilter,
+  audio:    audioFilter,
+  year:     yearFilter,
+  category: categoryFilter,
   location: locationFilter,
+};
+
+const filters = {
+  audio:    audioOptions,
+  year:     yearOptions,
+  category: categoryOptions,
+  location: locationOptions,
 };
 ---
 
 <Layout page="vani">
-  <!-- ================= PAGE HEADER ================= -->
+
+  <!-- PAGE HEADER -->
   <section class="bg-white py-8 sm:py-10 lg:py-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <h1 class="font-pacifico text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-primary mb-3 sm:mb-4">
@@ -73,17 +161,15 @@ const activeFilters = {
     </div>
   </section>
 
-  <!-- ── Strip divider ── -->
   <div class="h-2 bg-primary-hover"></div>
 
-  <!-- ================= MAIN CONTENT ================= -->
+  <!-- MAIN CONTENT -->
   <section class="bg-section-bg min-h-screen">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 lg:py-12">
-      <!-- React Component with client-side interactivity -->
       <VaniList
         client:load
         lectures={paginatedLectures}
-        filters={vaniData.filters}
+        filters={filters}
         activeFilters={activeFilters}
         totalRecords={totalRecords}
         currentPage={page}
@@ -92,4 +178,5 @@ const activeFilters = {
       />
     </div>
   </section>
+
 </Layout>
