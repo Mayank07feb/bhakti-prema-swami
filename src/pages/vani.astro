@@ -42,14 +42,14 @@ const normalizedLectures = allLectures.map((item: any) => {
       })
     : "—";
 
-  // ✅ New API: category_names & location_names are already resolved strings
+  // New API: category_names & location_names are already resolved strings
   const categoryNames: string[] = item.category_names || [];
   const locationNames: string[] = item.location_names || [];
 
-  // ✅ New API: audio field (was is_audio_available)
+  // New API: audio field (was is_audio_available)
   const hasAudio = item.audio === "YES";
 
-  // ✅ slug null → fallback to id
+  // slug null → fallback to id
   const slug = item.slug || String(item.id);
 
   return {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function VaniList({
   lectures,
@@ -11,6 +11,29 @@ export default function VaniList({
 }) {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [pendingFilters, setPendingFilters] = useState({});
+  const dropdownRefs = useRef({});
+
+  // ── Click outside → close dropdown ───────────────────────
+  useEffect(() => {
+    if (!openDropdown) return;
+
+    const handleClickOutside = (e) => {
+      const ref = dropdownRefs.current[openDropdown];
+      if (ref && !ref.contains(e.target)) {
+        closeDropdown();
+      }
+    };
+
+    // Small delay so the same click that opens doesn't immediately close
+    const timer = setTimeout(() => {
+      document.addEventListener("mousedown", handleClickOutside);
+    }, 10);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openDropdown]);
 
   const initializePendingFilters = (filterId) => {
     if (!pendingFilters[filterId]) {
@@ -117,7 +140,11 @@ export default function VaniList({
           const pending     = pendingFilters[config.id] || new Set();
 
           return (
-            <div key={config.id} className="relative">
+            <div
+              key={config.id}
+              className="relative"
+              ref={(el) => { dropdownRefs.current[config.id] = el; }}
+            >
               {/* Trigger Button */}
               <button
                 onClick={() => toggleDropdown(config.id)}
