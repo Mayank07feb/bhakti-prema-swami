@@ -1,0 +1,154 @@
+---
+export const prerender = false;
+import Layout from "../layouts/Layout.astro";
+import { API } from "../config/api";
+
+// ── Fetch blogs ───────────────────────────────────────────────
+const response = await fetch(API.blogs);
+const data = await response.json();
+const allBlogs = data.success ? data.data : [];
+
+// ── Pagination ────────────────────────────────────────────────
+const page = parseInt(Astro.url.searchParams.get("page") || "1");
+const perPage = 12;
+const totalRecords = allBlogs.length;
+const totalPages = Math.max(1, Math.ceil(totalRecords / perPage));
+const startIndex = (page - 1) * perPage;
+const paginatedBlogs = allBlogs.slice(startIndex, startIndex + perPage);
+
+// ── Normalize blogs ───────────────────────────────────────────
+const blogs = paginatedBlogs.map((blog: any) => ({
+  id: blog.id,
+  slug: blog.slug,
+  title: blog.name,
+  excerpt: blog.meta_description || "Read more...",
+  image: blog.media?.[0]?.thumbnail_url || "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=800",
+  date: new Date(blog.created_at_utc).toLocaleDateString("en-IN", {
+    day: "numeric", month: "short", year: "numeric"
+  }),
+}));
+---
+
+<Layout page="blogs">
+
+  <!-- PAGE HEADER -->
+  <section class="bg-white py-8 sm:py-10 lg:py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <h1 class="font-pacifico text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-primary mb-3 sm:mb-4">
+        Blog
+      </h1>
+      <p class="text-text-body/70 text-sm sm:text-base max-w-2xl">
+        Insights, wisdom, and reflections on spiritual life
+      </p>
+      <span class="block w-16 sm:w-20 h-1 bg-primary rounded-full mt-4"></span>
+    </div>
+  </section>
+
+  <div class="h-2 bg-primary-hover"></div>
+
+  <!-- MAIN CONTENT -->
+  <section class="bg-section-bg min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-16">
+
+      {/* Stats */}
+      <p class="text-xs sm:text-sm text-text-body/60 mb-6">
+        Showing <span class="font-bold text-text-body">{blogs.length}</span> of <span class="font-bold text-text-body">{totalRecords}</span> posts
+      </p>
+
+      {/* Blog Grid */}
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {blogs.map((blog: any) => (
+          <a
+            href={`/blogs/${blog.slug}`}
+            class="group bg-white rounded-xl overflow-hidden border border-text-body/10 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+          >
+            {/* Image */}
+            <div class="aspect-[16/10] overflow-hidden bg-gray-100">
+              <img
+                src={blog.image}
+                alt={blog.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Content */}
+            <div class="p-5">
+              <p class="text-xs text-text-body/50 mb-2">{blog.date}</p>
+              <h3 class="text-lg font-bold text-text-body mb-2 group-hover:text-primary transition-colors duration-200 line-clamp-2">
+                {blog.title}
+              </h3>
+              <p class="text-sm text-text-body/70 line-clamp-3 mb-4">
+                {blog.excerpt}
+              </p>
+              <span class="inline-flex items-center gap-1.5 text-primary text-sm font-semibold group-hover:gap-2.5 transition-all duration-200">
+                Read more
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {/* Empty State */}
+      {blogs.length === 0 && (
+        <div class="text-center py-16">
+          <p class="text-text-body/60 text-lg">No blog posts found.</p>
+        </div>
+      )}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div class="mt-12 flex items-center justify-center gap-3">
+          {/* Previous */}
+          {page > 1 ? (
+            <a
+              href={`/blogs?page=${page - 1}`}
+              class="inline-flex items-center gap-2 bg-white border border-text-body/20 text-text-body px-5 py-2.5 rounded-full text-sm font-semibold shadow-sm hover:border-primary hover:text-primary hover:shadow-md active:scale-95 transition-all duration-200"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Previous
+            </a>
+          ) : (
+            <span class="inline-flex items-center gap-2 bg-white border border-text-body/20 text-text-body/40 px-5 py-2.5 rounded-full text-sm font-semibold cursor-not-allowed">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Previous
+            </span>
+          )}
+
+          {/* Page Info */}
+          <span class="text-sm text-text-body/60 font-medium px-3">
+            Page {page} of {totalPages}
+          </span>
+
+          {/* Next */}
+          {page < totalPages ? (
+            <a
+              href={`/blogs?page=${page + 1}`}
+              class="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-sm hover:bg-primary-hover hover:shadow-lg active:scale-95 transition-all duration-200"
+            >
+              Next
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          ) : (
+            <span class="inline-flex items-center gap-2 bg-primary/40 text-white px-5 py-2.5 rounded-full text-sm font-semibold cursor-not-allowed">
+              Next
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          )}
+        </div>
+      )}
+
+    </div>
+  </section>
+
+</Layout>
